@@ -1,0 +1,222 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 991.98px) {
+  .padding {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .padding {
+    padding: 1rem;
+  }
+}
+
+.padding {
+  padding: 5rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  width: 600px;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  /*background-color: #fff;*/
+  background-clip: border-box;
+  border: 1px solid #cacaca;
+  border-radius: 5px;
+  /*-webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+    box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)*/
+  height: 14em;
+}
+
+.btn-out {
+  position: absolute;
+  z-index: 99999;
+  background-color: transparent;
+  border: 0;
+  padding: 20px;
+}
+
+.btn-share {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  z-index: 99999;
+  background-color: transparent;
+  border: 0;
+  padding: 20px;
+}
+
+.txt-share {
+  position: absolute;
+  top: 55px;
+  right: 8px;
+  z-index: 99999;
+  background-color: transparent;
+  border: 0;
+  padding: 0px;
+  text-decoration: none;
+}
+
+.rounded-10 {
+  border-radius: 10px;
+}
+
+.storemapper-iw-close {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  border: none;
+  width: 16px;
+  height: 16px;
+  top: 5px;
+  right: 5px;
+}
+
+.card .card-body {
+  padding: 1rem 1rem;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.items {
+  width: 90%;
+  margin: 0px auto;
+  /*margin-top: 20px*/
+}
+
+.slick-slide {
+  margin: 10px;
+}
+
+.media iframe,
+.media-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 0;
+  border-radius: inherit;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-color: rgba(120, 120, 120, 0.1);
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.media-content:before {
+  content: "";
+  position: absolute;
+  height: 10%;
+  width: 90%;
+  left: 5%;
+  bottom: 0;
+  background: inherit;
+  background-position-y: 100%;
+  filter: blur(10px);
+}
+
+.circle .media-content:before {
+  width: 40%;
+  left: 30%;
+}
+
+.widget-card .widget-card-cover {
+  background-color: #000000;
+}
+
+.modal-backdrop {
+  opacity: 0.9 !important;
+}
+
+.close-button-1 {
+  margin-bottom: 20px;
+  border: 0;
+  z-index: 2000;
+  float: right;
+  position: absolute;
+  top: -8px;
+  right: 10px;
+  background-color: transparent;
+}
+
+.close-button {
+  float: right;
+  margin-bottom: 20px;
+  border: 0;
+  z-index: 3200;
+  float: right;
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+  top: -39px;
+  right: -7px;
+}
+
+.star {
+  width: 80%;
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px;
+}
+
+.card-title {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.card-text {
+  font-size: 0.775rem;
+  margin-bottom: 0.5rem;
+  line-height: 1rem;
+  font-weight: 200;
+}
+
+iframe {
+  height: calc(100vh - 4px);
+  width: calc(100vw - 4px);
+  box-sizing: border-box;
+}
+
+.slideh:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.addpoints {
+  z-index: 3000;
+  background-color: transparent;
+}
+
+.neutro {
+  text-decoration: none;
+  color: black;
+}
