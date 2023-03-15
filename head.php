@@ -52,7 +52,7 @@
     ?>
 
     <?php
-        //new PHP Version, modified: 02/03/2023
+        //new PHP Version, modified: 02/03/2023/ -
      if ($ciudad) {
          echo "<title>Imagee" + $ciudad + "</title>";
          echo "<link rel=manifest href='./manifests/manifest-'" + $ciudad + ".json>";
