@@ -1,16 +1,18 @@
 <!doctype html>
 <html lang="es">
+
 <head>
 
     <!-- Facebook Propiedades -->
-    <Link rel="canonical"                  href="https://app.imageen.net" />
-    <meta property="og:url"                content="https://app.imageen.net" />
-    <meta property="og:type"               content="website" />
-    <meta property="og:title"              content="Con Imageen revive la historia" />
-    <meta property="og:description"        content="App para poder visualizar monumentos o espacios historicos desde tu dispositivo móvil" />
-    <meta property="og:image"              content="https://admin.imageen.net/imagenes/LogoFacebook2.png" />
-    <meta property="og:locale"             content="es_ES" />
-    <meta property="fb:app_id"             content="467353625276049" />
+    <Link rel="canonical" href="https://app.imageen.net" />
+    <meta property="og:url" content="https://app.imageen.net" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Con Imageen revive la historia" />
+    <meta property="og:description"
+        content="App para poder visualizar monumentos o espacios historicos desde tu dispositivo móvil" />
+    <meta property="og:image" content="https://admin.imageen.net/imagenes/LogoFacebook2.png" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="fb:app_id" content="467353625276049" />
     <!-- End Facebook Propiedades -->
 
     <meta charset="utf-8">
@@ -19,7 +21,20 @@
     <meta name="author" content="">
     <meta name="generator" content="">
 
-    <?php switch ($v) {
+    <!--Switch modified, 23/03/2023.  
+    La función isset() se utiliza para verificar si la variable $v
+     está definida antes de ejecutar la estructura switch. 
+     Si la variable $v está definida, se ejecuta la estructura switch como antes. 
+     Si la variable $v no está definida, se asigna un valor predeterminado a la variable $ciudad,
+      como se hace en el else.-->
+
+
+    <?php 
+          $v = isset($_GET["v"]) && !empty($_GET["v"]) ? $_GET["v"] : "default_value";
+
+    
+    if(($v)) {
+    switch ($v) {
         case "1000":
             $ciudad = "Madrid";
             break;
@@ -42,6 +57,12 @@
             $ciudad = null;
             break;
     }
+
+} else {
+    $ciudad = null; // o asignar otro valor predeterminado
+}
+
+
 
     if (imageen_en_useragent()) {
         $capado_apple = true;
@@ -68,12 +89,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-36x36.png">
-    <link rel="icon" type="image/png" sizes="48x48"  href="./favicon/<?=$ciudad?>/android-icon-48x48.png">
-    <link rel="icon" type="image/png" sizes="72x72"  href="./favicon/<?=$ciudad?>/android-icon-72x72.png">
-    <link rel="icon" type="image/png" sizes="96x96"  href="./favicon/<?=$ciudad?>/android-icon-96x96.png">
-    <link rel="icon" type="image/png" sizes="144x144"  href="./favicon/<?=$ciudad?>/android-icon-144x144.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="./favicon/<?=$ciudad?>/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512"  href="./favicon/<?=$ciudad?>/android-icon-512x512.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="./favicon/<?=$ciudad?>/android-icon-48x48.png">
+    <link rel="icon" type="image/png" sizes="72x72" href="./favicon/<?=$ciudad?>/android-icon-72x72.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./favicon/<?=$ciudad?>/android-icon-96x96.png">
+    <link rel="icon" type="image/png" sizes="144x144" href="./favicon/<?=$ciudad?>/android-icon-144x144.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon/<?=$ciudad?>/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon/<?=$ciudad?>/android-icon-512x512.png">
     <link rel="apple-touch-icon" href="./favicon/<?=$ciudad?>/apple-icon.png">
     <link rel="apple-touch-icon" sizes="57x57" href="./favicon/<?=$ciudad?>/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="./favicon/<?=$ciudad?>/apple-icon-60x60.png">
@@ -87,13 +108,13 @@
 
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="./favicon/<?=$ciudad?>/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">	
+    <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <?php if ($v) { ?>
-      <meta name="apple-mobile-web-app-title" content="Imageen <?=$ciudad?>">
+    <?php if (isset($v) && $v) { ?>
+    <meta name="apple-mobile-web-app-title" content="Imageen <?=$ciudad?>">
     <?php } else { ?>
-      <meta name="apple-mobile-web-app-title" content="Imageen">
+    <meta name="apple-mobile-web-app-title" content="Imageen">
     <?php } ?>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -109,10 +130,13 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQTX87S8M6"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-CQTX87S8M6');
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-CQTX87S8M6');
     </script>
 
     <!-- Firebase compatibilidad con v8 para auth-->
@@ -122,7 +146,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-check-compat.js"></script>
 
     <script>
-      const firebaseConfig = {
+    const firebaseConfig = {
         apiKey: "AIzaSyB97Z4gnECGXzhNx4HKOg1vdVUnw-7cIzA",
         authDomain: "imageen-app.firebaseapp.com",
         projectId: "imageen-app",
@@ -130,12 +154,11 @@
         messagingSenderId: "948349517057",
         appId: "1:948349517057:web:daf048012d126550c46f00",
         measurementId: "G-MZR2HJJKGM"
-      };
+    };
 
-      const firebaseApp = firebase.initializeApp(firebaseConfig);
-      const analytics = firebase.analytics();
-      const appCheck = firebase.appCheck();
-
+    const firebaseApp = firebase.initializeApp(firebaseConfig);
+    const analytics = firebase.analytics();
+    const appCheck = firebase.appCheck();
     </script>
 
     <!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700" rel="stylesheet">
@@ -147,19 +170,22 @@
 
 
     <!-- Bootstrap core CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
     <!-- Fuentes de Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Raleway&family=Roboto:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Raleway&family=Roboto:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Remix Icon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <!-- Swiper -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
     <!-- Hojas de estilo -->
     <link href="signin.css" rel="stylesheet">
@@ -169,68 +195,93 @@
 
     <!-- Deshabilitar botón back del navegador-->
     <script>
-      window.addEventListener('popstate', () => {
+    window.addEventListener('popstate', () => {
         window.history.go(1);
-      });
-      window.history.pushState(null, null, window.location.href);
+    });
+    window.history.pushState(null, null, window.location.href);
     </script>
 
     <!-- Facebook Pixel Code -->
     <!-- TODO: revisar el id para firebase -->
     <script>
-      !function(f,b,e,v,n,t,s) {
-        if(f.fbq)return;
-        n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;
-        n.push=n;
-        n.loaded=!0;
-        n.version='2.0';
-        n.queue=[];
-        t=b.createElement(e);
-        t.async=!0;
-        t.src=v;
-        s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)
-      }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '730954361279726'); 
-      fbq('track', 'PageView');
+    ! function(f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function() {
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '730954361279726');
+    fbq('track', 'PageView');
     </script>
+    
     <noscript>
-      <img height="1" width="1"src="https://www.facebook.com/tr?id=730954361279726&ev=PageView&noscript=1"/>
+        <img height="1" width="1" src="https://www.facebook.com/tr?id=730954361279726&ev=PageView&noscript=1" />
     </noscript>
     <!-- End Facebook Pixel Code -->
 
     <!-- TikTok Pixel Code -->
     <script>
-      !function (w, d, t) {
-        w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++
-)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=i+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-       
+    ! function(w, d, t) {
+        w.TiktokAnalyticsObject = t;
+        var ttq = w[t] = w[t] || [];
+        ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias",
+            "group", "enableCookie", "disableCookie"
+        ], ttq.setAndDefer = function(t, e) {
+            t[e] = function() {
+                t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+            }
+        };
+        for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
+        ttq.instance = function(t) {
+            for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) ttq.setAndDefer(e, ttq.methods[n]);
+            return e
+        }, ttq.load = function(e, n) {
+            var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
+            ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = i, ttq._t = ttq._t || {}, ttq._t[e] = +new Date,
+                ttq._o = ttq._o || {}, ttq._o[e] = n || {};
+            n = document.createElement("script");
+            n.type = "text/javascript", n.async = !0, n.src = i + "?sdkid=" + e + "&lib=" + t;
+            e = document.getElementsByTagName("script")[0];
+            e.parentNode.insertBefore(n, e)
+        };
+
         ttq.load('CDR3A0JC77U7SE2I6JB0');
         ttq.page();
-      }(window, document, 'ttq');
+    }(window, document, 'ttq');
     </script>
     <!-- End TikTok Pixel Code -->
 
-    <!-- Event snippet for Website traffic conversion page --> 
-    <script> 
-      gtag('event', 'conversion', {'send_to': 'AW-10940344382/FvNgCP3xxc0DEL7Q4eAo'}); 
+    <!-- Event snippet for Website traffic conversion page -->
+    <script>
+    gtag('event', 'conversion', {
+        'send_to': 'AW-10940344382/FvNgCP3xxc0DEL7Q4eAo'
+    });
     </script>
     <!-- End Event snippet añadido por Jairo para el tema de google Adwors que necesita Pedro-->
 
     <!-- Service worker -->
     <script>
     if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
+        window.addEventListener('load', () => {
             navigator.serviceWorker.register('/service-worker.js')
-            .then((reg) => {
-                console.log('Service worker registered.', reg);
-            })
-            .catch((error) => {
-                console.log('Service worker not registered.', error);
-            });
+                .then((reg) => {
+                    console.log('Service worker registered.', reg);
+                })
+                .catch((error) => {
+                    console.log('Service worker not registered.', error);
+                });
         });
-    } 			
-    </script>  
+    }
+    </script>
 
 </head>

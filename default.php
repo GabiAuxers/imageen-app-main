@@ -1,4 +1,4 @@
-<?php include 'dao/conexion.php';
+<?php include 'conexion.php';
 include 'literal.php';
 include 'functions.php';
 include 'auth.php';
@@ -7,7 +7,11 @@ if ($auth == 0) {
 
 	include 'head.php';
 	include 'firebaseauth.php';
-	$parametros = $_SERVER['QUERY_STRING'];
+	$parametros = array();
+	if (isset($_SERVER['QUERY_STRING'])) {
+		parse_str($_SERVER['QUERY_STRING'], $parametros);
+	}
+	//$parametros = $_SERVER['QUERY_STRING'];
 }
 ?>
 

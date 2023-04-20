@@ -1,4 +1,4 @@
-<?php include 'conexion.php';
+<?php include 'dao/conexion.php';
 include 'literal.php';
 include 'functions.php';
 include 'auth.php';

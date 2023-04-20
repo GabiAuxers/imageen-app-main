@@ -15,42 +15,42 @@
   	<div class="modal-dialog modal-sm">
     	<div class="modal-content">
       		<div class="modal-header">
-        		<h5 class="modal-title"><i class="align-middle ri-map-pin-fill ri-xl m-2"></i><?=getTxt(24,$l)?></h5>
+        		<h5 class="modal-title"><i class="align-middle ri-map-pin-fill ri-xl m-2"></i><?=getTxt(24, $l)?></h5>
         		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
       		</div>
       		<div class="modal-body">
-        		<p><?=getTxt(25,$l)?></p> 
+        		<p><?=getTxt(25, $l)?></p>
       		</div>
       		<div class="modal-footer">
-        		<a class="btn btn-warning w-100" onclick="getLocation()" style="margin:0 auto;"><i class="align-middle ri-map-pin-fill ri-xl m-2"></i><?=getTxt(26,$l)?></a>	       
-        		<a class="btn btn-warning mt-10px w-100" onclick="cambiarVisual(2, <?=$l?>)" style="margin:0 auto;"><i class="align-middle ri-file-list-fill ri-xl m-2"></i><?=getTxt(27,$l)?></a>
-  				<a class="btn btn-warning mt-10px w-100" onclick="goContents(false)" style="margin:0 auto;"><i class="align-middle ri-close-fill ri-xl m-2"></i><?=getTxt(97,$l)?></a>        		
+        		<a class="btn btn-warning w-100" onclick="getLocation()" style="margin:0 auto;"><i class="align-middle ri-map-pin-fill ri-xl m-2"></i><?=getTxt(26, $l)?></a>
+        		<a class="btn btn-warning mt-10px w-100" onclick="cambiarVisual(2, <?=$l?>)" style="margin:0 auto;"><i class="align-middle ri-file-list-fill ri-xl m-2"></i><?=getTxt(27, $l)?></a>
+  				<a class="btn btn-warning mt-10px w-100" onclick="goContents(false)" style="margin:0 auto;"><i class="align-middle ri-close-fill ri-xl m-2"></i><?=getTxt(97, $l)?></a>
       		</div>
     	</div>
   	</div>
-</div> 
+</div>
 
 <div id="add2hs-ios" class="modal fade">
   	<div class="modal-dialog modal-sm modal-dialog-centered">
     	<div class="modal-content border-3">
       		<div class="modal-header">
-        		<h5 class="modal-title"><?=getTxt(140,$l)?></h5>
+        		<h5 class="modal-title"><?=getTxt(140, $l)?></h5>
       		</div>
       		<div class="modal-body">
-			  <h6><?=getTxt(141,$l)?> ( <img src="imagenes/icono-compartir.png" style="width:15px;" /> ) <?=getTxt(142,$l)?></h6>
+			  <h6><?=getTxt(141, $l)?> ( <img src="imagenes/icono-compartir.png" style="width:15px;" /> ) <?=getTxt(142, $l)?></h6>
 			</div>
       		<div class="modal-footer">
-        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=getTxt(104,$l)?></button>
+        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=getTxt(104, $l)?></button>
       		</div>
     	</div>
   	</div>
-</div>  	 
+</div>
 
 
 <div id="fvarios" class="modal fade">
   	<div class="modal-dialog">
     	<div class="modal-content" id="varios">
-      		
+
 		</div>
 	</div>
 </div>
@@ -60,20 +60,20 @@
     	<div class="modal-content">
        		<button type="button" class="close-button" data-bs-dismiss="modal" aria-hidden="true" style="float:right;"><i class="ri-close-fill ri-3x text-danger"></i></button>
       		<div class="modal-body">
-        		<h5><?=getTxt(82,$l)?></h5> 
+        		<h5><?=getTxt(82, $l)?></h5>
         		<div class="row mt-20px">
         			<div class="d-flex justify-content-between text-center">
         				<div><a id="p1" style="cursor: pointer;"><img id="s1" src="imagenes/star0.png" class="image-fluid"></a></div>
         				<div><a id="p2" style="cursor: pointer;"><img id="s2" src="imagenes/star0.png" class="image-fluid"></a></div>
           				<div><a id="p3" style="cursor: pointer;"><img id="s3" src="imagenes/star0.png" class="image-fluid"></a></div>
         				<div><a id="p4" style="cursor: pointer;"><img id="s4" src="imagenes/star0.png" class="image-fluid"></a></div>
-        				<div><a id="p5" style="cursor: pointer;"><img id="s5" src="imagenes/star0.png" class="image-fluid"></a></div>    	        	     
-        			</div>	
-        		</div>	
+        				<div><a id="p5" style="cursor: pointer;"><img id="s5" src="imagenes/star0.png" class="image-fluid"></a></div>
+        			</div>
+        		</div>
       		</div>
       		<div class="modal-footer">
-      			<button type="button" class="btn btn-secondary btn-xs" data-bs-dismiss="modal"><?=getTxt(62,$l)?></button>  
-      			<a id="puntuar" type="button" class="btn btn-info btn-xs" data-bs-dismiss="modal" style="display:none;"><?=getTxt(96,$l)?></a>       			 
+      			<button type="button" class="btn btn-secondary btn-xs" data-bs-dismiss="modal"><?=getTxt(62, $l)?></button>
+      			<a id="puntuar" type="button" class="btn btn-info btn-xs" data-bs-dismiss="modal" style="display:none;"><?=getTxt(96, $l)?></a>
       		</div>
 		</div>
 	</div>
@@ -84,12 +84,12 @@
     	<div class="modal-content">
        		<button type="button" class="close-button" data-bs-dismiss="modal" aria-hidden="true" style="float:right;"><i class="ri-close-fill ri-3x text-danger"></i></button>
       		<div class="modal-body">
-        		<h5><?=getTxt(106,$l)?></h5> 
-        		<h6><?=getTxt(107,$l)?></h6> 
+        		<h5><?=getTxt(106, $l)?></h5>
+        		<h6><?=getTxt(107, $l)?></h6>
       		</div>
       		<div class="modal-footer">
-      			<button type="button" class="btn boton-secundario" data-bs-dismiss="modal"><?=getTxt(62,$l)?></button>  
-      			<button id="puntuar" type="button" data-bs-toggle="offcanvas" data-bs-target="#pagina-valoracion" class="btn boton-principal" data-bs-dismiss="modal"><?=getTxt(123,$l)?></button>       			 
+      			<button type="button" class="btn boton-secundario" data-bs-dismiss="modal"><?=getTxt(62, $l)?></button>
+      			<button id="puntuar" type="button" data-bs-toggle="offcanvas" data-bs-target="#pagina-valoracion" class="btn boton-principal" data-bs-dismiss="modal"><?=getTxt(123, $l)?></button>
       		</div>
 		</div>
 	</div>
@@ -101,10 +101,10 @@
        		<!--<button type="button" class="close-button" data-bs-dismiss="modal" aria-hidden="true" style="float:right;"><i class="ri-close-fill ri-3x text-danger"></i></button>-->
       		<div class="modal-body">
 				<div class="mx-auto text-center">
-					<h5><?=getTxt(164,$l)?></h5>
+					<h5><?=getTxt(164, $l)?></h5>
 				</div >
 				<div class="mx-auto text-center">
-					<button type="button" class="btn boton-principal" data-bs-dismiss="modal"><?=getTxt(162,$l)?></button>
+					<button type="button" class="btn boton-principal" data-bs-dismiss="modal"><?=getTxt(162, $l)?></button>
 				</div >
       		</div>
 		</div>
@@ -134,16 +134,16 @@
 
 <div id="v3dvista" class="modal fade">
   	<div class="modal-dialog modal-fullscreen">
-    	<div class="modal-content">		
+    	<div class="modal-content">
     		<button type="button" class="btn-out" data-bs-dismiss="modal" onclick ="openPoints();" aria-label="close"><i class="ri-close-circle-fill text-danger ri-3x"></i></button>
 			<!--TODO: Boton Compartir del aplicativo sustituir por el de 3dVista-->
 			<!--<button type="button" class="btn-share" data-bs-dismiss="modal" onclick ="shareMedia();" aria-label="close"><i style="color:rgba(255,255,255,1);" class="ri-share-line ri-3x"></i></button>-->
 			<!--TODO: Boton Compartir del aplicativo sustituir por el de 3dVista-->
-			<!--<button type="button" class="txt-share" data-bs-dismiss="modal" onclick ="shareMedia();" style="color:rgba(255,255,255,1);" ><h8><?=getTxt(166,$l)?></h8></button>-->
+			<!--<button type="button" class="txt-share" data-bs-dismiss="modal" onclick ="shareMedia();" style="color:rgba(255,255,255,1);" ><h8><?=getTxt(166, $l)?></h8></button>-->
 			<div id="padreiframe" class="embed-responsive embed-responsive-16by9">
 				<!--<iframe id="video" class="embed-responsive-item" style='position:absolute; top:0; left:0; width:100%; height:100%;' name='TOUR NAME' width='100%' height='100%' frameborder='0' allowfullscreen='true' allow='fullscreen; accelerometer; gyroscope; magnetometer; vr; xr; xr-spatial-tracking; autoplay; camera; microphone'></iframe>-->
-			</div>	
-		</div> 
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -153,11 +153,11 @@
 	</div>
 	<div class="offcanvas-body pt-0 d-flex flex-column align-items-center">
 		<? if ($suscripcion_usuario==3) { ?>
-			<h3 id="membership-label"><?=getTxt(127,$l)?></h3>
-			<p class="titulo-menu my-4"><?=getTxt(125,$l)?><?=$fin_suscripcion_usuario?><?=getTxt(126,$l)?></p>
+			<h3 id="membership-label"><?=getTxt(127, $l)?></h3>
+			<p class="titulo-menu my-4"><?=getTxt(125, $l)?><?=$fin_suscripcion_usuario?><?=getTxt(126, $l)?></p>
 		<? } else { ?>
-			<h3 id="membership-label"><?=getTxt(61,$l)?></h3>
-			<!--<p class="titulo-menu my-4"><?=getTxt(124,$l)?></p>-->
+			<h3 id="membership-label"><?=getTxt(61, $l)?></h3>
+			<!--<p class="titulo-menu my-4"><?=getTxt(124, $l)?></p>-->
 		<? } ?>
 		<div id="form-checkout" class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
 			<?$conn = new mysqli($db_server, $db_username, $db_userpassword, $db_name);
@@ -166,7 +166,7 @@
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
 				$suscripcion = 0;
-				while($row = mysqli_fetch_array($result) ) {				
+				while($row = mysqli_fetch_array($result) ) {
 					$suscripcion++;
 					$codigosus 	= $row["CODIGO"];
 					$nombresus	= $row["NOMBRE".$l];
@@ -175,42 +175,54 @@
 					$activa		= $row["ACTIVA"];
 					$destacada  = $row["DESTACADA"];
 					$stripe_price 	= $row["STRIPEPRICE"];
-					
+
 					if ($activa) {
 						$fecha_actual = date("d-m-Y");
 						if (!empty($fin_suscripcion_usuario)) $fecha_actual = $fin_suscripcion_usuario;
 						$endsubscription = date("d-m-Y",strtotime($fecha_actual."+ ".$validezsus." days"));
 						if ($destacada) { ?>
 							<div class="d-flex flex-row-reverse">
-								<div class="mas-popular"><?=getTxt(144,$l)?></div>
+								<div class="mas-popular"><?=getTxt(144, $l)?></div>
 							</div>
 						<? } ?>
-						<a onclick="clickSuscripcion(<?=$suscripcion?>)" class="ficha-suscripcion<?=($destacada?'-seleccionada':'')?>" id="ficha-sus-<?=$suscripcion?>" data-stripe="<?=$stripe_price?>">
-							<div class="d-flex flex-column">
-								<div>
-									<h6 style="font-weight:bold; color:#2765A0;"><?=$nombresus?></h6>
-								</div>
-								<div style="font-size:0.9em; color:black;">
-									<?=getTxt(63,$l)?><span class="ms-1"><?echo $endsubscription?></span>
-									<span style="color:grey;"><br><?=getTxt(145,$l)?></span>
-								</div>
-							</div>		
+<!--Variables Undefined 27/03/2023-->
+						<?php if (isset($suscripcion) && isset($destacada) && isset($stripe_price) && isset($nombresus) && isset($endsubscription)) {?>
+	<a onclick="clickSuscripcion(<?=$suscripcion?>)" class="ficha-suscripcion<?=$destacada ? '-seleccionada' : ''?>" id="ficha-sus-<?=$suscripcion?>" data-stripe="<?=$stripe_price?>">
+		<div class="d-flex flex-column">
+			<div>
+				<h6 style="font-weight:bold; color:#2765A0;"><?=$nombresus?></h6>
+			</div>
+			<div style="font-size:0.9em; color:black;">
+				<?=getTxt(63, $l)?><span class="ms-1"><?=$endsubscription?></span>
+				<span style="color:grey;"><br><?=getTxt(145, $l)?></span>
+			</div>
+		</div>
+	</a>
+<?php }?>
+<!--Variables Undefined 27/03/2023-->
+
+
 							<div class="ms-auto" style="text-align: right; color:black;">
-								<h5><?=$preciosus?>€</h5>
+							<!--Variable $preciosus Undefined 27/03/2023-->
+							<?php if (isset($preciosus)) {?>
+							<h5><?=$preciosus?>€</h5>
+							<?php }?>
 							</div>
 						</a>
-					<? } 
+					<? }
 				}
 			}
-			$conn->close();?>	 				
+			$conn->close();?>
+			<!--undefined variable $url_checkout  + 7.4.32 php-->
 			<div class="mx-auto text-center">
-			    <? $url_checkout="./create_checkout_session.php" . ((!empty($_SERVER['QUERY_STRING']))?('\?'.$_SERVER['QUERY_STRING']):''); ?>
-				<button class="btn boton-principal m-3 row" id="checkout-button" onclick="goToCheckout('<?=$url_checkout?>')"><i class="ri-thumb-up-line align-middle fs-3"></i><?=getTxt(165,$l)?></button>
-			</div>
-			<p class="titulo-menu my-4"><?=getTxt(168,$l)?></p>
-		</div>			
+    <?php $url_checkout = "./create_checkout_session.php" . ((!empty($_SERVER['QUERY_STRING'])) ? ('?' . urlencode($_SERVER['QUERY_STRING'])) : '');?>
+    <button class="btn boton-principal m-3 row" id="checkout-button" onclick="goToCheckout('<?=$url_checkout?>')"><i class="ri-thumb-up-line align-middle fs-3"></i><?=getTxt(165, $l)?></button>
+</div>
+
+			<p class="titulo-menu my-4"><?=getTxt(168, $l)?></p>
+		</div>
   	</div>
-</div> 
+</div>
 
 <div class="offcanvas offcanvas-bottom" tabindex="-1" id="membership2" aria-labelledby="membership2-label" style="z-index:3000;">
 	<div class="offcanvas-header pb-0">
@@ -218,11 +230,11 @@
 	</div>
 	<div class="offcanvas-body pt-0 d-flex flex-column align-items-center">
 		<? if ($suscripcion_usuario==3) { ?>
-			<h3 id="membership2-label"><?=getTxt(127,$l)?></h3>
-			<p class="titulo-menu my-4"><?=getTxt(125,$l)?><?=$fin_suscripcion_usuario?><?=getTxt(126,$l)?></p>
+			<h3 id="membership2-label"><?=getTxt(127, $l)?></h3>
+			<p class="titulo-menu my-4"><?=getTxt(125, $l)?><?=$fin_suscripcion_usuario?><?=getTxt(126, $l)?></p>
 		<? } else { ?>
-			<h3 id="membership2-label"><?=getTxt(61,$l)?></h3>
-			<!--<p class="titulo-menu my-4"><?=getTxt(124,$l)?></p>-->
+			<h3 id="membership2-label"><?=getTxt(61, $l)?></h3>
+			<!--<p class="titulo-menu my-4"><?=getTxt(124, $l)?></p>-->
 		<? } ?>
 		<div id="form-checkout2" class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
 			<?$conn = new mysqli($db_server, $db_username, $db_userpassword, $db_name);
@@ -231,7 +243,7 @@
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
 				$suscripcion = 0;
-				while($row = mysqli_fetch_array($result) ) {				
+				while($row = mysqli_fetch_array($result) ) {
 					$suscripcion++;
 					$codigosus 	= $row["CODIGO"];
 					$nombresus	= $row["NOMBRE".$l];
@@ -240,56 +252,63 @@
 					$activa		= $row["ACTIVA"];
 					$destacada  = $row["DESTACADA"];
 					$stripe_price 	= $row["STRIPEPRICE"];
-					
+
 					if ($activa) {
 						$fecha_actual = date("d-m-Y");
 						if (!empty($fin_suscripcion_usuario)) $fecha_actual = $fin_suscripcion_usuario;
 						$endsubscription = date("d-m-Y",strtotime($fecha_actual."+ ".$validezsus." days"));
 						if ($destacada) { ?>
 							<div class="d-flex flex-row-reverse">
-								<div class="mas-popular"><?=getTxt(144,$l)?></div>
+								<div class="mas-popular"><?=getTxt(144, $l)?></div>
 							</div>
 						<? } ?>
-						<a onclick="clickSuscripcion2(<?=$suscripcion?>)" class="ficha-suscripcion2<?=($destacada?'-seleccionada':'')?>" id="ficha-sus2-<?=$suscripcion?>" data-stripe="<?=$stripe_price?>">
+						<a onclick="clickSuscripcion2(<?=$suscripcion?>)" class="ficha-suscripcion2<?=($destacada ? '-seleccionada' : '')?>" id="ficha-sus2-<?=$suscripcion?>" data-stripe="<?=$stripe_price?>">
 							<div class="d-flex flex-column">
 								<div>
 									<h6 style="font-weight:bold; color:#2765A0;"><?=$nombresus?></h6>
 								</div>
 								<div style="font-size:0.9em; color:black;">
-									<?=getTxt(63,$l)?><span class="ms-1"><?echo $endsubscription?></span>
-									<span style="color:grey;"><br><?=getTxt(145,$l)?></span>
+									<?=getTxt(63, $l)?><span class="ms-1"><?echo $endsubscription?></span>
+									<span style="color:grey;"><br><?=getTxt(145, $l)?></span>
 								</div>
-							</div>		
+							</div>
+							<!--Number Format Function, php 7.4.32 and variable $preciosus defined 27/03/2023.
+								De esta forma, el precio original y el precio con descuento solo se mostrarán
+								 si la variable $preciosus está definida y tiene un valor asignado, 
+								 y se utiliza la función number_format() para formatear el resultado de la operación
+								  de resta como un número decimal con dos decimales.-->
 							<div class="ms-auto" style="text-align: right; color:black;">
-								<h5><del><h6><?=$preciosus?>€</h6></del> <?=(float)str_replace ( ',', '.', $preciosus)-(((float)str_replace ( ',', '.', $preciosus)*75)/100)?> €</h5>
+								<?php if (isset($preciosus)) { ?>
+        						<h5><del><h6><?= $preciosus ?>€</h6></del> <?= number_format((float) str_replace(',', '.', $preciosus) - (((float) str_replace(',', '.', $preciosus) * 75) / 100), 2) ?> €</h5>
+    							<?php } ?>
 							</div>
 						</a>
-					<? } 
+					<? }
 				}
 			}
-			$conn->close();?>	 				
+			$conn->close();?>
 			<div class="mx-auto text-center">
 			    <? $url_checkout="./create_checkout_session_cupon.php" . ((!empty($_SERVER['QUERY_STRING']))?('\?'.$_SERVER['QUERY_STRING']):''); ?>
-				<button class="btn boton-principal m-3 row" id="checkout-button2" onclick="goToCheckout2('<?=$url_checkout?>')"><i class="ri-thumb-up-line align-middle fs-3"></i><?=getTxt(165,$l)?></button>
+				<button class="btn boton-principal m-3 row" id="checkout-button2" onclick="goToCheckout2('<?=$url_checkout?>')"><i class="ri-thumb-up-line align-middle fs-3"></i><?=getTxt(165, $l)?></button>
 			</div>
-			<p class="titulo-menu my-4"><?=getTxt(218,$l)?></p>
-		</div>			
+			<p class="titulo-menu my-4"><?=getTxt(218, $l)?></p>
+		</div>
   	</div>
-</div> 
+</div>
 
 <div id="instrucciones" class="modal fade">
   	<div class="modal-dialog modal-sm">
     	<div class="modal-content border-3">
       		<div class="modal-header">
-        		<h5 class="modal-title"><i class="ri-user-location-line ri-2x"></i><?=getTxt(143,$l)?></h5>
+        		<h5 class="modal-title"><i class="ri-user-location-line ri-2x"></i><?=getTxt(143, $l)?></h5>
       		</div>
       		<div id="instrucciones_texto" class="modal-body">
 
 			</div>
       		<div class="modal-footer">
-        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=getTxt(104,$l)?></button>
+        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?=getTxt(104, $l)?></button>
       		</div>
     	</div>
   	</div>
-</div>  	 
+</div>
 

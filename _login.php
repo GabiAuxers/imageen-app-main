@@ -1,6 +1,11 @@
-<?php include 'dao/conexion.php';
+<?php 
+include 'conexion.php';
 include 'literal.php';
 include 'functions.php';
+//require_once 'Logger.php';
+
+
+session_start();
 
 $datos = json_decode(file_get_contents('php://input'));
 $ipaddress = $_SERVER['REMOTE_ADDR'];
@@ -13,6 +18,7 @@ mysqli_set_charset($conn, 'utf8');
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
+
 
 
 $sql = "SELECT CODIGO, NOMBRE, TELEFONO, FOTO, PROVIDER, EMAIL FROM usuarios WHERE UID = '$fb_uid'";
@@ -68,9 +74,28 @@ $tim = date('h:i:sa');
 $sql = "INSERT INTO HACCESOS (fecha, hora, ip, usuario) VALUES ('$dat', '$tim', '$ipaddress', '$codigousuario')";
 $conn->query($sql);
 
+///////////////////////////////////////////////////////////////////
+// Logging instance and bdd connection 24/03/2023
+//$logger = new Logger($conn);
+$postData = array(
+    'uid' => $datos->uid,
+    'nombre' => $datos->nombre,
+    'telefono' => $datos->telefono,
+    'foto' => $datos->foto,
+    'email' => $datos->email,
+    'provider' => $datos->provider
+);
+
+$additionalData = array(
+    'codigo_usuario' => $codigousuario
+);
+
+////$logger->logRequest($postData, $additionalData);
+///////////////////////////////////////////////////////////////////
 $conn->close();	
 
 $errorlogin = 0;
 echo json_encode(array('message' => $errorlogin));
+
 
 ?>

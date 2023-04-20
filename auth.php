@@ -1,17 +1,21 @@
-<?php include 'dao/conexion.php';
+<?php include 'conexion.php';
 
-// Undefine variable - Fix - [Added variable $l] - 06/03/2023
-$l = isset($l) ? $l:'';
-//
+// Undefine variable lng - Fix  - 23/03/2023
 
-$idioma = $_COOKIE['lng'];
+if (isset($_COOKIE['lng'])) {
+    $idioma = $_COOKIE['lng'];
+} else {
+    $idioma = "";
+}
+
 if ($idioma == ""){
-    $l = $_GET["l"];
+    $l = isset($_GET["l"]) ? $_GET["l"] : '';
 }
 
-if ($l == ""){
-	$l = $_COOKIE['lng'];
+if (!isset($l) || $l == "") {
+    $l = $idioma;
 }
+// Undefine variable lng - Fix  - 23/03/2023
 
 if ($l == "") {
 	$idioma = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,2);
@@ -33,8 +37,21 @@ if ($l == "") {
 	}
 }
 
-$codigousuario 	= trim($_COOKIE['usuario']," ");
-$token       	= trim($_COOKIE['token']," ");
+if (isset($_COOKIE['usuario'])) {
+    $codigousuario = trim($_COOKIE['usuario'], " ");
+} else {
+    $codigousuario = "";
+}
+
+
+if (isset($_COOKIE['token'])) {
+    $token = trim($_COOKIE['token'], " ");
+} else {
+    $token = "";
+}
+
+
+
 $ipaddress 		= $_SERVER['REMOTE_ADDR'];
 $auth = 0;
 
@@ -62,7 +79,11 @@ if ($codigousuario != "" &&  $token != ""){
 	    $idioma2_usuario  		= $row["IDIOMA2"];	    	    	    	    	    	    
 	    $auth = 1;
 		// Control para recarga de web después de un login en contenido de pago
-		$cliente = $_COOKIE['cliente'];
+		if (isset($_COOKIE['cliente'])) {
+			$cliente = $_COOKIE['cliente'];
+			// use $cliente variable as needed
+		  } 
+		//$cliente = $_COOKIE['cliente'];
 
 
 		if ($cliente == "1" && $nombre_usuario!= "Imageener") { 

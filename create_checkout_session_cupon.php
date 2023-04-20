@@ -17,7 +17,7 @@ else {
 
   header('Content-Type: application/json');
 
-  if ($_SERVER['SERVER_NAME']=="localhost") $YOUR_DOMAIN = "https://localhost/imageen";
+  if ($_SERVER['SERVER_NAME']=="localhost") $YOUR_DOMAIN = "https://localhost/imageen-app-main";
   else $YOUR_DOMAIN = "https://app.imageen.net";
 
   $checkout_session = \Stripe\Checkout\Session::create([
