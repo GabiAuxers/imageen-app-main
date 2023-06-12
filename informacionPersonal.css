@@ -1,0 +1,57 @@
+.listado-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .alineacion-elementos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .txt-editar{
+    font-family: "Montserrat" !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    text-decoration: underline !important;
+    text-decoration: none;
+    color: #000000;
+  }
+  
+
+  .title-infopersonal {
+    font-family: "Montserrat" !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    text-decoration: none;
+    color: #000000;
+    height: 0.5em;
+}
+.title-premium {
+  font-family: "Montserrat" !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  color: #2765A0;
+  text-decoration: underline;
+  height: 0.5em;
+}
+.info-texto {
+
+    font-family: "Montserrat" !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    text-decoration: none;
+    color: #000000;
+    opacity: 50%;
+    text-decoration: none !important;
+}
+.texto-oscuro {
+  color: #000; /* Un color oscuro */
+}
+
+.texto-claro {
+  color: #bcbcbc; /* Un color más claro */
+}

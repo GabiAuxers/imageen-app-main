@@ -1,0 +1,419 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 991.98px) {
+  .padding {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .padding {
+    padding: 1rem;
+  }
+}
+
+.padding {
+  padding: 5rem;
+}
+
+.card-buscador {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  /*-webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+    box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)*/
+  height: 14em;
+  border: 1px solid rgb(0 130 237 / 13%) !important;
+}
+
+.btn-out {
+  position: absolute;
+  z-index: 99999;
+  background-color: transparent;
+  border: 0;
+  padding: 20px;
+}
+
+.btn-share {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  z-index: 99999;
+  background-color: transparent;
+  border: 0;
+  padding: 20px;
+}
+
+.txt-share {
+  position: absolute;
+  top: 55px;
+  right: 8px;
+  z-index: 99999;
+  background-color: transparent;
+  border: 0;
+  padding: 0px;
+  text-decoration: none;
+}
+
+.rounded-10 {
+  opacity: 0;
+  transition: opacity 8s;
+  height: 250px;
+  width: 289px;
+}
+.rounded-10.loaded {
+  opacity: 1;
+}
+
+.storemapper-iw-close {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  border: none;
+  width: 16px;
+  height: 16px;
+  top: 5px;
+  right: 5px;
+}
+
+.card .card-body {
+  padding: 1rem 1rem;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.items {
+  width: 90%;
+  margin: 0px auto;
+  /*margin-top: 20px*/
+}
+
+.slick-slide {
+  margin: 10px;
+}
+
+.media iframe,
+.media-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 0;
+  border-radius: inherit;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-color: rgba(120, 120, 120, 0.1);
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.media-content:before {
+  content: "";
+  position: absolute;
+  height: 10%;
+  width: 90%;
+  left: 5%;
+  bottom: 0;
+  background: inherit;
+  background-position-y: 100%;
+  filter: blur(10px);
+}
+
+.circle .media-content:before {
+  width: 40%;
+  left: 30%;
+}
+
+.widget-card .widget-card-cover {
+  background-color: #000000;
+}
+
+.modal-backdrop {
+  opacity: 0 !important;
+}
+
+.close-button-1 {
+  margin-bottom: 20px;
+  border: 0;
+  z-index: 2000;
+  float: right;
+  position: absolute;
+  top: -8px;
+  right: 10px;
+  background-color: transparent;
+}
+
+.close-button {
+  float: right;
+  border: 0;
+  z-index: 3200;
+  right: 0;
+  background-color: transparent;
+}
+.close-button-modal-valoracion {
+  float: right;
+  border: 0;
+  z-index: 3200;
+  right: 0;
+  background-color: transparent;
+  width: 50px;
+  cursor: pointer;
+}
+.star {
+  width: 80%;
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px;
+}
+
+.card-title {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.card-text {
+  font-family: "Montserrat" !important;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+  line-height: 1rem;
+  font-weight: 200;
+}
+
+iframe {
+  height: calc(100vh - 4px);
+  width: calc(100vw - 4px);
+  box-sizing: border-box;
+}
+
+.slideh:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.addpoints {
+  z-index: 3000;
+  background-color: transparent;
+}
+
+.neutro {
+  text-decoration: none;
+  color: black;
+}
+.titulo-card {
+  font-family: "Montserrat";
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+}
+
+.modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  border-top: 0px solid #dee2e6;
+  border-bottom-right-radius: calc(0.3rem rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
+}
+.modal-footer-valoracion {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.75rem;
+  border-top: 1px solid transparent;
+  border-bottom-right-radius: calc(0.3rem rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
+}
+.txt-modalvaloracion-titulo {
+  width: 100%; /* Esto hará que el contenedor ocupe todo el espacio horizontal disponible */
+  display: flex;
+  align-items: center;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 32px;
+}
+.text-primary {
+  color: #2765a0 !important;
+}
+.btn-primary {
+  background-color: #2765a0 !important;
+  color: #fff;
+  border-radius: 90px !important;
+  font-family: "Montserrat" !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  width: 45% !important;
+  height: 51px !important;
+  padding: 0.5rem 0.85rem !important;
+  border-color: transparent !important;
+}
+.btn-modal-premium {
+  background-color: #f4c91e !important;
+  color: #fff;
+  border-radius: 90px !important;
+  font-family: "Montserrat" !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  width: 57% !important;
+  height: 51px !important;
+  padding: 0.5rem 0.85rem !important;
+  border-color: transparent !important;
+}
+.btn-primary-rate {
+  background-color: #000000 !important;
+  color: #fff !important;
+  border-radius: 90px !important;
+  font-family: "Montserrat" !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  width: 120px !important;
+  padding: 0.5rem 0.85rem !important;
+  border-color: transparent !important;
+}
+
+.btn-primary-valoracion {
+  background-image: linear-gradient(to right, #2765a0, #66a3d2);
+  border: 0px solid aquamarine !important;
+  color: #fff;
+  border-radius: 90px !important;
+  font-family: "Montserrat" !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  width: 120px !important;
+  padding: 0.5rem 0.85rem !important;
+  border-color: transparent !important;
+}
+
+.modal-content-valoracion {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 9px solid rgba(39, 101, 160, 0.5) !important;
+  border-radius: 32px !important;
+  outline: 0;
+}
+.txt-titulo-modal {
+  font-family: "Montserrat" !important;
+  font-style: normal;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  line-height: 32px;
+  color: #f4c91e !important;
+  text-align: center;
+  text-decoration: none;
+}
+
+.nuevo-modal-header {
+  display: flex;
+  flex-shrink: 0;
+  /* align-items: center; */
+  justify-content: right;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+  border-bottom: transparent;
+}
+.nuevo-modal-content {
+  border-radius: 2.3rem;
+  outline: 0;
+  padding: 10px;
+  border: transparent;
+  max-width: 300px;
+  height: 280px;
+  margin: 1.75rem auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  background-color: #fff;
+}
+.cerrar-modal {
+  display: block;
+  width: 50px;
+  height: auto;
+}
+
+.nuevo-modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 3.75rem;
+}
+.nuevo-modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.txt-nuevo-modal {
+  display: flex;
+  align-items: center;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #000000;
+}
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Ajusta el valor de opacidad según tus preferencias */
+  z-index: 9998; /* Asegúrate de que el valor de z-index sea mayor que el del modal */
+    display: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+}

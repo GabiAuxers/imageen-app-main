@@ -85,8 +85,9 @@
 
 .rating-ficha {
   font-size: 19px;
-  display: flex;
-  margin-top: -5px;
+  flex-wrap: nowrap; /* Asegura que los elementos no se envuelvan
+  justify-content: space-between; /* Esto hará que los elementos se coloquen en los extremos opuestos */
+  align-items: center;
 }
 
 .rating-ficha .fas {
@@ -95,17 +96,15 @@
 }
 
 .texto-stars {
-  font-family: "Source Sans Pro";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
-  display: flex;
-  align-items: center;
   margin-left: 5px;
 }
 
 .texto-reviews {
-  font-family: "Source Sans Pro";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -118,7 +117,7 @@
 
 
 .texto-reviews2 {
-  font-family: "Source Sans Pro";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -128,9 +127,21 @@
   opacity: 0.25;
   margin-top: 10px;
 }
+.texto-direccion {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  opacity: 0.35;
+  margin-top: 10px;
+}
+
 
 .texto-descripcion-ficha {
-  font-family: "Source Sans Pro";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -138,8 +149,7 @@
   display: flex;
   align-items: center;
   line-height: 20px;
-  text-align: left;
-  padding-bottom: 20px;
+  text-align: center;
   height: 6em;
 }
 
@@ -154,7 +164,7 @@
 }
 
 .texto-stars {
-  font-family: "Source Sans Pro";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -196,7 +206,7 @@
 }
 
 .texto-comentarios2 {
-  font-family: "Source Sans Pro";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
