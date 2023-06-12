@@ -1,28 +1,34 @@
-<!--Traemos los datos o del listado de contents.php o de info_box.php-->
+
 <?php
 //26-05
-        if (isset($_POST['codigo'])) {
-            $codigo = $_POST['codigo'];
-        } else {
-            $codigo = $_SESSION['codigo'];
-        }
+    //<!--Traemos los datos del listado, del buscador o de info_box.php-->
+        $codigo = $_SESSION['codigo'];
+        $nombre = $_SESSION['nombre'];
+        $descripcionpunto = $_SESSION['descripcion'];
 
-        if (isset($_POST['nombre'])) {
-            $nombre = $_POST['nombre'];
-        } else {
-            $nombre = $_SESSION['nombre'];
+        $conn3 = @new mysqli($db_server, $db_username, $db_userpassword, $db_name);
+        if ($conn3->connect_error) {
+            $additionalInfo = "Fallo en la conexión a la base de datos en la clase ficha.php línea 9. Comprueba las credenciales de la base de datos y que el servidor esté funcionando correctamente. Error específico: " . $conn->connect_error;
+            $errorLogger = new ErrorLogger();
+            $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
+            die("Ha ocurrido un error al intentar conectar a la base de datos.");
         }
-
-        if (isset($_POST['descripcion'])) {
-            $descripcionpunto = $_POST['descripcion'];
-        } else {
-            $descripcionpunto = $_SESSION['descripcion'];
-        }
-        
-    ?>
+    mysqli_set_charset($conn3, 'utf8');
+    if ($conn3->connect_error) {
+        die("Error al conectar a la base de datos: " . $conn3->connect_error);
+    }
+    // Consulta para obtener la dirección de la tabla puntos
+$sql = "SELECT DIRECCION FROM PUNTOS WHERE CODIGO = '$codigo'";
+$result3 = $conn3->query($sql);
+if ($result3->num_rows > 0) {
+    while ($row3 = $result3->fetch_assoc()) {
+        $direccion = $row3["DIRECCION"];
+    }
+}
+?>
 
 <!--Mostramos los datos en la ficha-->
-<div class="container content-container">
+<div class="container content-container" id=ficha>
     <div class="row header">
         <div class="col-12 back-button text-left" style="margin-top: 50px;">
             <a href="contents.php">
@@ -34,8 +40,10 @@
                 <span class="title"><?php echo $nombre; ?></span>
                 <div>
                     <img src="assets\img\icons\Favoritos.svg" width="30px" height="30px" alt="Favoritos">
-                    <img src="assets\img\icons\Descargar.svg" width="30px" height="30px" alt="Compartir">
                 </div>
+            </div>
+            <div class="texto-direccion">
+                <?php echo $direccion; ?>
             </div>
             <div class="texto-reviews2">
                 <?php echo $descripcionpunto; ?>
@@ -44,12 +52,7 @@
     </div>
 </div>
 <?php
-    $conn3 = new mysqli($db_server, $db_username, $db_userpassword, $db_name);
-    mysqli_set_charset($conn3, 'utf8');
     if (isset($codigo)) {
-        // Crear conexión a la base de datos
-        $conn3 = new mysqli($db_server, $db_username, $db_userpassword, $db_name);
-        mysqli_set_charset($conn3, 'utf8');
 
         // Consulta para obtener las imágenes y descripciones adicionales de la tabla materiales
         $sql3 = "SELECT PUNTOS.NOMBRE AS NOMBRE_PUNTO, PUNTOS.CIUDAD, PUNTOS.LOCALIZACION, PUNTOS.CLIENTE, PUNTOS.IMAGEN AS IMAGEN_PUNTO, MATERIALES.CODIGO AS CODIGO_MATERIAL, MATERIALES.NOMBRE" . $l . " AS NOMBRE_MATERIAL, MATERIALES.DESCRIPCION" . $l . " AS DESCRIPCION_MATERIAL, MATERIALES.TIPO AS TIPO_MATERIAL, MATERIALES.ACCESO AS ACCESO_MATERIAL, MATERIALES.INSTRUCCIONES" . $l . " AS INSTRUCCION_MATERIAL, MATERIALES.IMAGEN AS IMAGEN_MATERIAL
@@ -120,26 +123,30 @@
 
                 <div class="swiper-slide col-12 col-md-6 col-lg-4" id="<?= $nombre_punto ?>#<?= $nombre_material ?>">
                     <div class="card-content-center">
-                        <div class="texto-descripcion-ficha">
-                            <?php echo $descripcion_material; ?>
-                        </div>
+
                         <img src="<?= $ruta_imagen ?>" class="image-slide" style="filter: brightness(1);">
                         <div class=" nombres-container">
-                        <?php echo $nombre_material; ?>
+                            <?php echo $nombre_material; ?>
                         </div>
-                        <div class="rating-ficha">
+
+                        <div class="rating-ficha d-flex justify-content-between">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <div class="texto-stars">
-                                <p>5.0</p>
+                                <a>5.0</a>
                             </div>
+                            <img src="assets\img\icons\Descargar.svg" width="30px" height="30px"
+                                style="margin-left: 15px;" alt="Compartir">
+                        </div>
+                        <div class="texto-descripcion-ficha">
+                            <?php echo $descripcion_material; ?>
                         </div>
                     </div>
 
-                    <div class="position-absolute">
+                    <div class="position-absolute" style="margin-top:-140px">
                         <?php if ($acceso_material > $suscripcion_usuario && !$capado_apple) : ?>
                         <?php if ($nombre_usuario != "Imageener") : ?>
                         <div>
@@ -233,7 +240,7 @@
     ?>
 
 <script>
-    var fichaData = JSON.parse(localStorage.getItem('fichaData'));
+var fichaData = JSON.parse(localStorage.getItem('fichaData'));
 var numSlides = document.querySelectorAll('.swiper-slide').length;
 var initialSlide;
 

@@ -1,0 +1,22 @@
+{
+  "workbench.preferredDarkColorTheme": "One Dark Pro Darker",
+  "oneDarkPro.bold": true,
+  "editor.inlineSuggest.enabled": true,
+  "oneDarkPro.vivid": true,
+  "workbench.colorTheme": "One Dark Pro Darker",
+  "workbench.preferredHighContrastColorTheme": "One Dark Pro Darker",
+  "editor.fontLigatures": true,
+  "workbench.sideBar.location": "right",
+  "editor.cursorBlinking": "expand",
+  "window.zoomLevel": -1,
+  "editor.fontFamily": "'Cascadia Code PL', monospace",
+  "editor.fontVariations": true,
+  "githubPullRequests.pullBranch": "never",
+  "editor.codeActionsOnSave": {
+  
+  },
+  "markdown.updateLinksOnFileMove.enableForDirectories": false,
+  "editor.linkedEditing": true
+}
+    
+    

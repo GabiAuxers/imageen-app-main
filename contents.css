@@ -1,0 +1,388 @@
+html {
+  font-size: 14px;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
+.titulo-menu {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  margin: 0px;
+  align-self: center;
+}
+
+hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.banderas-menu {
+  margin-top: -20px;
+  position: "";
+  bottom: 0%;
+  content: "";
+  width: auto;
+  height: 8%;
+}
+
+.pagina-info {
+  height: 100%;
+}
+
+.pagina-info::before {
+  position: absolute;
+  top: 0%;
+  content: "";
+  width: 150%;
+  height: 30%;
+  border-radius: 0% 0% 50% 50%;
+  background: #f1f1f1;
+  opacity: 95%;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: -1;
+}
+
+.nombres-container2 {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%
+}
+.tamaño{
+ width: 30px !important;
+ height: 30px !important;
+}
+
+
+
+#membership {
+  height: 100%;
+}
+
+#membership::before {
+  position: absolute;
+  top: 0%;
+  content: "";
+  width: 150%;
+  height: 15%;
+  border-radius: 0% 0% 50% 50%;
+  background: #f1f1f1;
+  opacity: 95%;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: -1;
+}
+
+#membership2 {
+  height: 100%;
+}
+
+#membership2::before {
+  position: absolute;
+  top: 0%;
+  content: "";
+  width: 150%;
+  height: 15%;
+  border-radius: 0% 0% 50% 50%;
+  background: #f1f1f1;
+  opacity: 95%;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: -1;
+}
+
+.ficha-suscripcion {
+  border: 1px solid #d6d6d6;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1em;
+  color: black;
+  text-decoration: none;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+}
+
+.ficha-suscripcion-seleccionada {
+  background: #fff5e2;
+  border: 2px solid #ffd200;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1em;
+  color: black;
+  text-decoration: none;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+}
+
+.ficha-suscripcion2 {
+  border: 1px solid #d6d6d6;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1em;
+  color: black;
+  text-decoration: none;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+}
+
+.ficha-suscripcion2-seleccionada {
+  background: #fff5e2;
+  border: 2px solid #ffd200;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1em;
+  color: black;
+  text-decoration: none;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+}
+
+.mas-popular {
+  background: #ffd200;
+  border-radius: 5px 5px 0px 0px;
+  padding: 0.25em 1em 0.25em 1em;
+  margin-right: 0.5em;
+  font-size: 0.9em;
+  font-family: sans-serif;
+}
+@media (orientation: portrait) {
+  .frame-punto-imageen {
+    background: white;
+    position: absolute;
+    bottom: 0%;
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    border-radius: 10px 10px 0px 0px;
+    text-align: center;
+  }
+
+  .imagen-punto-imageen {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0px 0px;
+  }
+}
+
+@media (orientation: landscape) {
+  .frame-punto-imageen {
+    background: white;
+    position: absolute;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+  }
+
+  .imagen-punto-imageen {
+    height: 60vh;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.swiper-mat-main {
+  width: 100%;
+  height: 80vh;
+}
+
+.swiper-mat-thum {
+  width: 100%;
+  height: 16vh;
+}
+
+.swiper-ciudades {
+  width: 100%;
+  height: auto;
+  
+}
+.swiper-slide .img-list {
+  width: 100%;
+  height: 264px;
+  border-radius: 30px;
+}
+/*tamaño de los modales al clickar en los puntos de interes*/
+.swiper-slide img {
+  display: block;
+  width: 100%;
+
+}
+
+.swiper-slide {
+  font-size: 14px;
+  background: white;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  
+}
+.swiper-pagination-bullet-active {
+  opacity: 1; /* Esto hace que el bullet activo sea completamente opaco */
+  background: #0b0b0b !important; /* Cambia esto al color que prefieras para el bullet activo */
+}
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+  bottom: 24px;
+  left: 0;
+  width: 100%;
+}
+
+.centered-image {
+  transform: translateX(-65%);
+}
+.texto-favoritos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%
+}
+
+.titulo-POIs {
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+.titulo-ciudades {
+  font-family: "Montserrat";
+  font-size: 26px;
+  font-weight: 600;
+  color: black;
+}
+
+.texto-POIs {
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  color: white;
+}
+
+.boton-amarillo-POIs {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 0.4rem;
+  border-radius: 5px;
+  background-color: rgba(255, 210, 0, 1);
+  color: black;
+}
+
+.boton-azul-POIs {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 0.4rem;
+  border-radius: 5px;
+  background-color: #2765a0;
+  color: white;
+}
+
+.boton-blanco-POIs {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 0.4rem;
+  border-radius: 5px;
+  background-color: white;
+  color: #2765a0;
+}
+
+.boton-rojo-POIs {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 0.4rem;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+}
+
+.texto-tipo-acceso-POIs {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+.aspa-cierre {
+  background-color: rgba(37, 45, 50, 0.4);
+  color: white;
+}
+
+.tooltip-descarga {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 9px;
+  color: white;
+}
+
+.image-transition {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.image-transition.loaded {
+  opacity: 1;
+}
+.listado-busqueda {
+border-radius: 5px;
+
+}
