@@ -1,5 +1,5 @@
 <!--footer-->
-<div class="footer">
+<div class="footer" id="footer-container">
 
 	<div class="d-flex col-12 justify-content-center ri-3x">
 		<!-- Enlace a patrocinador Rodilla 

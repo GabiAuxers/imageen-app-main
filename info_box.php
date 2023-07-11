@@ -12,7 +12,7 @@ session_start();
     require_once 'functions.php';
     require_once 'auth.php';
 
-    if ($_SERVER['SERVER_NAME'] == "localhost") {
+    if ($_SERVER['SERVER_NAME'] == "localhost:8000") {
         $ruta_admin = "/admin";
     } else {
         $ruta_admin = "https://admin.imageen.net";

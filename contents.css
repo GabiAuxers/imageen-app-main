@@ -53,18 +53,21 @@ hr {
 }
 
 .nombres-container2 {
+  justify-content: space-between;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
   display: flex;
-  align-items: center;
   color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%
+  width: 100%;
+}
+
+.img-container {
+  display: flex;
+  justify-content: flex-end;
 }
 .tamaño{
  width: 30px !important;
@@ -385,4 +388,17 @@ hr {
 .listado-busqueda {
 border-radius: 5px;
 
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 0;
 }

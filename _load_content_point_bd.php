@@ -4,8 +4,11 @@ include 'literal.php';
 include 'functions.php';
 include 'auth.php';
 //Carga de medio directo gracias a enlace o codigo del material
-if ($_SERVER['SERVER_NAME']=="localhost") $ruta_admin="../admin";
-else $ruta_admin="https://admin.imageen.net";
+if (strpos($_SERVER['SERVER_NAME'], 'localhost') === 0) {
+    $ruta_admin = __DIR__ . '/admin';
+} else {
+    $ruta_admin = 'https://admin.imageen.net';
+}
 $m= $_POST["media"];
 $codigo_material= $m;
 //Conjunto para obtener los datos necesarios dependiendo del código de material

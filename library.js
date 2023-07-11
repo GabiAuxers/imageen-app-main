@@ -146,7 +146,11 @@ function login(FBUser, l, v) {
 	var parser = new UAParser();
 	var result = parser.getResult();
 	var sistemaOperativo = result.os.name + " " + result.os.version;
-	var esDispositivoMovil = ["Android", "iOS"].includes(result.os.name) ? "Si" : "No";
+	var esDispositivoMovil = ["Android", "iOS"].includes(result.os.name);
+
+	// Obtiene el tipo de dispositivo si es un dispositivo móvil, si no, pone "No".
+	var tipoDispositivo = esDispositivoMovil ? (result.device.model || "Dispositivo móvil desconocido") : "No";
+
 
 	fetch("./_login.php", {
 		method: "POST",
@@ -159,7 +163,7 @@ function login(FBUser, l, v) {
 			"provider": FBUser.providerData[0].providerId,
 			"l": l,
 			"sistema_operativo": sistemaOperativo,
-			"dispositivo_movil": esDispositivoMovil
+			"dispositivo_movil": tipoDispositivo
 		}),
 		headers: {
 			'Content-Type': 'application/json'// AQUI indicamos el formato
@@ -216,7 +220,11 @@ function loginAnonimo(l, v) {
 	var parser = new UAParser();
 	var result = parser.getResult();
 	var sistemaOperativo = result.os.name + " " + result.os.version;
-	var esDispositivoMovil = ["Android", "iOS"].includes(result.os.name) ? "Si" : "No";
+	var esDispositivoMovil = ["Android", "iOS"].includes(result.os.name);
+
+	// Obtiene el tipo de dispositivo si es un dispositivo móvil, si no, pone "No".
+	var tipoDispositivo = esDispositivoMovil ? (result.device.model || "Dispositivo móvil desconocido") : "No";
+
 
 	if (navidad==1){
 		fetch("./_login.php", {
@@ -230,7 +238,7 @@ function loginAnonimo(l, v) {
 				"provider": "anonimo",
 				"l": l,
 				"sistema_operativo": sistemaOperativo,
-				"dispositivo_movil": esDispositivoMovil
+				"dispositivo_movil": tipoDispositivo
 			}),
 			headers: {
 				'Content-Type': 'application/json'// AQUI indicamos el formato
@@ -860,8 +868,13 @@ function isGeolocation(l) {
 function showError(error) {
 	switch (error.code) {
 		case error.PERMISSION_DENIED:
+			if (error.code == error.PERMISSION_DENIED) {
+				setCookie("geo_denied", "1", 200);
+				location.href = "contents.php";
+				
+			  }
 			console.log("Permiso denegado");
-			goContents(false);
+
 			break;
 		case error.POSITION_UNAVAILABLE:
 			console.log("Posición no disponible");
@@ -1414,12 +1427,15 @@ function onLoadContents(v, d, p, m, u, a) {
 
 	
 	if (v == 1 && navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showWithPosition, showError);
+		var geo_denied = getCookie("geo_denied");
+		if (geo_denied == null) {
+		  navigator.geolocation.getCurrentPosition(showWithPosition, showError);
+		}
 		sizemap();
-	} else if (v == 3) {
+	  } else if (v == 3) {
 		showWithoutPosition();
 		sizemap();
-	}
+	  }
 
 	if (d) {
 		$.ajax({
@@ -1590,3 +1606,34 @@ function setCookie(cname, cvalue, exdays) {
 function copiarPortapapeles() {
 	navigator.clipboard.writeText("hola");
 }
+$(document).ready(function() {
+    function searchtxt(val, l) {
+        if (val.length > 0) {
+            // Realiza la búsqueda y genera los resultados
+            //...
+
+            // Oculta el mapa, el pie de página y las categorías
+            $('#map').hide();
+            $('#footer-container').hide();
+            $('#categories').hide();  // Ocultamos las categorías
+
+            // Muestra el fondo negro
+            $('#overlay').show();
+        }
+    }
+
+    // Escucha el evento de ingreso de teclas en la caja de búsqueda
+    $('#caja-busqueda').on('keyup', function() {
+        const searchValue = $(this).val();
+        searchtxt(searchValue, '<?= $l ?>');
+        
+        // Verifica si la caja de búsqueda está vacía
+        // Si está vacía, muestra el mapa, el pie de página, las categorías y oculta el fondo negro
+        if (searchValue.length === 0) {
+            $('#map').show();
+            $('#footer-container').show();
+            $('#categories').show();  // Mostramos las categorías
+            $('#overlay').hide();
+        }
+    });
+});

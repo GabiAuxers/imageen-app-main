@@ -1,11 +1,6 @@
 <body>
     <?php
-    require_once 'auth.php';
-    require_once 'variables.php';
-    require_once 'head.php';
-    require_once 'js.php';
     require_once 'footer.php';
-    require_once 'botones.php';
     ?>
 
     <div class="container content-container">

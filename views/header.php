@@ -43,7 +43,7 @@ if (($mes == 12 && $dia > 19) || ($mes == 1 && $dia < 7)) {
     </div>
     <!--fin Buscador y resultados-->
     <!--Categorías-->
-    <div class="d-flex justify-content-center mt-3 ri-2x">
+    <div class="d-flex justify-content-center mt-3 ri-2x" id="categories">
         <div class="col">
             <a class="text-decoration-none text-dark" href="#" data-bs-toggle="tooltip" data-bs-placement="top"
                 title="Monumentos">
@@ -77,3 +77,4 @@ if (($mes == 12 && $dia > 19) || ($mes == 1 && $dia < 7)) {
     <?php endif; ?>
 </div>
 <!-- fin cabecera-->
+

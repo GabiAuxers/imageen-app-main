@@ -1,10 +1,6 @@
 
 <body>
     <?php
-    include 'auth.php';
-    include 'variables.php';
-    include 'head.php';
-    include 'js.php';
     include 'footer.php';
     ?>
 

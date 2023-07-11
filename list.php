@@ -22,6 +22,9 @@ session_start();
     $_SESSION['codigo'] = $codigo;
     $_SESSION['nombre'] = $nombre;
     $_SESSION['descripcion'] = $descripcion;
+
+    // Obtener la fecha actual
+    $fecha_actual = date('Y-m-d'); // Formato: Año-Mes-Día
     ?>
 <?php
                    $conn = @new mysqli($db_server, $db_username, $db_userpassword, $db_name);
@@ -65,7 +68,7 @@ session_start();
                                 die("Ha ocurrido un error al intentar conectar a la base de datos.");
                             }
                             mysqli_set_charset($conn2, 'utf8');
-                            $sql2 = "SELECT PUNTOS.NOMBRE, CATEGORIA, DESCRIPCION" . $l . ", PUNTOS.CODIGO, IMAGEN, CLIENTE, GALERIA.ICONO, GALERIA.ICONOG FROM PUNTOS, GALERIA WHERE CIUDAD = '" . $codigociudadciclo . "' AND (PUNTOS.ICONO = GALERIA.CODIGO)";
+                            $sql2 = "SELECT PUNTOS.NOMBRE, CATEGORIA, DESCRIPCION" . $l . ", PUNTOS.FECHANEW, PUNTOS.CODIGO, IMAGEN, CLIENTE, GALERIA.ICONO, GALERIA.ICONOG FROM PUNTOS, GALERIA WHERE CIUDAD = '" . $codigociudadciclo . "' AND (PUNTOS.ICONO = GALERIA.CODIGO)";
                             $result2 = $conn2->query($sql2);
                             if (!$result2) {
                                 $errorLogger->logError("Error al ejecutar la consulta SQL", $conn2->error);
@@ -84,6 +87,7 @@ session_start();
                                                     $nombre        = $row2["NOMBRE"];
                                                     $categoriapunto        = $row2["CATEGORIA"];
                                                     $descripcion     = $row2["DESCRIPCION" . $l . ""];
+                                                    $fechanew        = $row2["FECHANEW"];
                                                     $codigo        = $row2["CODIGO"];
                                                     $imagenpunto         = $row2["IMAGEN"];
                                                     $clientepunto        = $row2["CLIENTE"];
@@ -100,15 +104,21 @@ session_start();
                         <img class="img-list image-transition"
                             src="https://admin.imageen.net/data/puntos/<?= $imagenpunto ?>">
 
-                        <div class=" nombres-container2">
-                            <div style="margin-left: 20px;">
-                                <?= $nombre; ?>
-                            </div>
+                            <div class="nombres-container2">
+    <div class="col-9">
+        <?= $nombre; ?>
+    </div>
 
-                            <div class="col-2 tamaño">
-                                <img src="assets\img\icons\Favoritos.svg" alt="Favoritos ciudades Imageen">
-                            </div>
-                        </div>
+    <div class="img-container col-3 tamaño">
+        <?php
+            // Comparar las fechas
+            if($fechanew > $fecha_actual) {
+                echo '<img class="col-6" src="assets\img\icons\icon-new-list.svg" alt="Nuevo punto Imageen">';
+            }
+            echo '<img class="col-6" src="assets\img\icons\Favoritos.svg" alt="Favoritos ciudades Imageen">';  
+        ?>                                                    
+    </div>
+</div>
 
                     </div>
 
@@ -169,17 +179,17 @@ $(window).on('load', function() {
                 // when window width is >= 320px
                 330: {
                     slidesPerView: 1.5,
-                    spaceBetween: 5
+                    spaceBetween: 15
                 },
                 // when window width is >= 480px
                 495: {
                     slidesPerView: 2,
-                    spaceBetween: 10
+                    spaceBetween: 15
                 },
                 // when window width is >= 640px
                 660: {
                     slidesPerView: 3,
-                    spaceBetween: 10
+                    spaceBetween: 15
                 },
                 825: {
                     slidesPerView: 4,

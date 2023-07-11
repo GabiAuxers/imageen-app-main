@@ -39,16 +39,28 @@ if (strlen($txt) >= 3) {
     if ($result->num_rows > 0) {
         if ($result->num_rows > 1) {
             ?>
-<h6 class="mt-1"><?=$result->num_rows . " "?><?=getTxt(101, $l) . " \"" . $txt . "\""?></h6>
+     
+     <div class="card h-80 mt-3">
+        <div class="card-body">
+            <h6 class="resultado-busqueda text-center"><?=$result->num_rows . " "?><?=getTxt(101, $l) . " \"" . $txt . "\""?></h6>
+         </div>
+    </div>                 
+                   
 <?php
 } else {
             ?>
-<h6 class="mt-1"><?=(getTxt(102, $l) . " \"" . $txt . "\"")?></h6>
+<br>
+<div class="card h-80">
+    <div class="card-body">
+         <h6 class="resultado-busqueda text-center"><?=(getTxt(102, $l) . " \"" . $txt . "\"")?></h6>
+     </div>
+ </div>
+                    
 <?php
 }
         ?>
-<div class="container-flulid">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+<div class="container-flulid" style="padding: 10px">
+    <div>
         <?php
         while ($row = mysqli_fetch_array($result)) {
             $nombre = $row["NOMBRE"];
@@ -72,12 +84,12 @@ if (strlen($txt) >= 3) {
             onclick=" showFicha({'codigo': '<?=$codigo?>', 'descripcion': '<?=$descripcion?>', 'nombre': '<?=$nombre?>'})">
 
             <?php } else {?>
-            <a href="#pointx" class="text-decoration-none text-dark" data-bs-dismiss="offcanvas"
+            <a href="#pointx" class="text-decoration-none text-dark" 
                 onclick="loadPoint({'codigo': '<?=$codigo?>', 'imagen': '<?=$imagen_punto?>', 'cliente': '<?=$cliente_punto?>', 'nombre': '<?=$titulo_punto?>', 'descripcion': '<?=$descripcion_punto?>', 'icono': '<?=$iconog?>'})"
-                data-bs-toggle="modal">
+                >
                 <?php }?>
-                <div class="col mb-4" style="padding:10px">
-                    <div class="card-buscador h-100">
+                <div class="col" >
+                    <div class="card-buscador h-100 mt-2">
                         <div class="card-body">
                             <h5 class="titulo-card text-center"><?=$nombre?></h5>
                             <div class="row mt-2">
@@ -104,7 +116,13 @@ if (strlen($txt) >= 3) {
 </div>
 <?php } else {?>
 <!-- Texto No se encontraron resultados-->
-<h6 class="mt-1"><?=getTxt(66, $l)?></h6>
+<br>
+<div class="card h-80">
+     <div class="card-body">
+            <h6 class="resultado-busqueda text-center"><?=getTxt(66, $l)?></h6>
+    </div>
+</div>
+                  
 <?php }
     $conn->close();
 } else {?>

@@ -16,11 +16,14 @@ if ($x != "" || $visualizacion_usuario == 1) {
     }
     if ($t == 3) { ?>
         <body onload="onLoadContents(3, false, '<?= $p ?>', '<?= $m ?>', '<?= $u ?>', '<?= $a ?>');">
+        <div id="overlay"></div>
     <?php } else { ?>
         <body onload="onLoadContents(1, false, '<?= $p ?>','<?= $m ?>', '<?= $u ?>', '<?= $a ?>');">
+        <div id="overlay"></div>
         <?php }
     } else { ?>
         <body onload="onLoadContents(2, false, '<?= $p ?>', '<?= $m ?>', '<?= $u ?>', '<?= $a ?>');">
+        <div id="overlay"></div>
 <?php } ?>
 <!--Cargamos como vista parcial la cabecera-->
 <?php @include('views/header.php')?>

@@ -2,9 +2,11 @@
 <?php
 //26-05
     //<!--Traemos los datos del listado, del buscador o de info_box.php-->
+        session_start();
         $codigo = $_SESSION['codigo'];
         $nombre = $_SESSION['nombre'];
         $descripcionpunto = $_SESSION['descripcion'];
+        $fecha_actual = date('Y-m-d'); // Formato: Año-Mes-Día
 
         $conn3 = @new mysqli($db_server, $db_username, $db_userpassword, $db_name);
         if ($conn3->connect_error) {
@@ -18,11 +20,12 @@
         die("Error al conectar a la base de datos: " . $conn3->connect_error);
     }
     // Consulta para obtener la dirección de la tabla puntos
-$sql = "SELECT DIRECCION FROM PUNTOS WHERE CODIGO = '$codigo'";
+$sql = "SELECT DIRECCION, FECHANEW FROM PUNTOS WHERE CODIGO = '$codigo'";
 $result3 = $conn3->query($sql);
 if ($result3->num_rows > 0) {
     while ($row3 = $result3->fetch_assoc()) {
         $direccion = $row3["DIRECCION"];
+        $fechanew = $row3["FECHANEW"];
     }
 }
 ?>
@@ -39,7 +42,13 @@ if ($result3->num_rows > 0) {
             <div class="txt-ficha-titulo d-flex justify-content-between">
                 <span class="title"><?php echo $nombre; ?></span>
                 <div>
-                    <img src="assets\img\icons\Favoritos.svg" width="30px" height="30px" alt="Favoritos">
+                <?php
+                    // Comparar las fechas
+                    if($fechanew > $fecha_actual) {
+                        echo '<img class="col-6" style="width: 30px; height: 30px;" src="assets\img\icons\icon-new-list.svg" alt="Nuevo punto Imageen">';
+                    }
+                        echo '<img class="col-6" style="width: 30px; height: 30px;" src="assets\img\icons\Favoritos.svg" alt="Favoritos ciudades Imageen">';  
+                ?>  
                 </div>
             </div>
             <div class="texto-direccion">
@@ -82,6 +91,7 @@ if ($result3->num_rows > 0) {
                                 $tipo_material = $row3["TIPO_MATERIAL"];
                                 $instrucciones_material = str_replace("~", "'", $row3["INSTRUCCION_MATERIAL"]);
                                 $nombre_punto  = $row3["NOMBRE_PUNTO"];
+                                
                                 // 
                                 if ($imagen_material) {
                                     $ruta_imagen = $ruta_admin . "/data/materiales/" . $imagen_material;

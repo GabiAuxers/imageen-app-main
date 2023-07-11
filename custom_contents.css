@@ -32,8 +32,8 @@ body {
     -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
     box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)*/
   height: 14em;
-  border: 1px solid rgb(0 130 237 / 13%) !important;
 }
+
 
 .btn-out {
   position: absolute;
@@ -202,6 +202,7 @@ body {
   margin-bottom: 0.5rem;
   line-height: 1rem;
   font-weight: 200;
+  text-align: left;
 }
 
 iframe {
@@ -210,6 +211,19 @@ iframe {
   box-sizing: border-box;
 }
 
+.g-recaptcha iframe {
+
+  height: 100%;
+  width: 110%;
+  box-sizing: border-box;
+  
+}
+.alerta-recaptcha{
+  font-family: 'Montserrat';
+  font-weight: 100;
+  margin-top: 10px;
+  font-weight: 400;
+}
 .slideh:before {
   content: "";
   position: absolute;
@@ -234,6 +248,11 @@ iframe {
   font-family: "Montserrat";
   font-size: 20px;
   font-weight: 600;
+  color: black;
+}
+.resultado-busqueda {
+  height: 10px;
+  font-family: "Montserrat";
   color: black;
 }
 

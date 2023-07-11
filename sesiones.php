@@ -45,7 +45,7 @@ if ($codigousuario != "" &&  $token != "") {
     } else {
     echo json_encode(array("error" => "Error al buscar datos del usuario."));
 }
-session_destroy();
+//session_destroy();
 
 $conn->close();
 ?>

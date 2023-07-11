@@ -7,13 +7,6 @@
     <link href="guiaVirtual.css" rel="stylesheet">
 
 <body>
-    <?php
-     include 'auth.php';
-     include 'variables.php';
-     include 'head.php';
-     
-  ?>
-
     <div class="swiper-container-gv" style="overflow: hidden;">
         <div class="swiper-wrapper ">
 

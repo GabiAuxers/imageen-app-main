@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<!-- Popup preguntando sobre la geolocalizacion, mmm que hace esto en el footer?¿?¿ -->
+<!-- Popup preguntando sobre la geolocalizacion -->
 <div id="askGeo" class="modal fade">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -35,7 +35,7 @@
         </div>
     </div>
 </div>
-<!-- FIN Popup preguntando sobre la geolocalizacion, mmm que hace esto en el footer?¿?¿ -->
+<!-- FIN Popup preguntando sobre la geolocalizacion -->
 
 <!-- mas modales ... -->
 <div id="add2hs-ios" class="modal fade">
