@@ -7,11 +7,12 @@ if ($auth == 0) {
 
 	include 'head.php';
 	include 'firebaseauth.php';
-	$parametros = array();
+
 	if (isset($_SERVER['QUERY_STRING'])) {
-		parse_str($_SERVER['QUERY_STRING'], $parametros);
+		$parametros = $_SERVER['QUERY_STRING'];
+	} else {
+		$parametros = '';
 	}
-	//$parametros = $_SERVER['QUERY_STRING'];
 }
 ?>
 

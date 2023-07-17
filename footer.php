@@ -25,7 +25,7 @@
 				</a>
 			</div>
 			<div class="col">
-				<a class="text-decoration-none text-dark d-flex justify-content-center align-items-center" id="icono-listado" href="?section=listado" title="<?= getTxt(150, $l) ?>">
+				<a class="text-decoration-none text-dark d-flex justify-content-center align-items-center" id="icono-listado" href="?section=listado&t=3" title="<?= getTxt(150, $l) ?>">
 					<?php if($section === "listado"){?>
 					<?php ?>
 						<img src="assets\img\icons\Listado_Click.svg" width="40px" height="40px" alt="Listado ciudades Imageen" class="icono-footer">
@@ -36,7 +36,7 @@
 			</div>
 
 			<div class="col">
-				<a class="text-decoration-none text-dark d-flex justify-content-center align-items-center" id="icono-favoritos" href="?section=favoritos" title="Favoritos" data-toggle="modal" data-target="#modalPremium">
+				<a class="text-decoration-none text-dark d-flex justify-content-center align-items-center" id="icono-favoritos"   title="Favoritos" data-toggle="modal" data-target="#modalPremium" href="">
 					<?php if($section === "favoritos"){?>
 					<?php ?>
 						<img src="assets\img\icons\Favoritos_Click.svg" width="40px" height="40px" alt="Favoritos ciudades Imageen" class="icono-footer" >
@@ -47,7 +47,7 @@
 			</div>
 
 			<div class="col">
-				<a class="text-decoration-none text-dark d-flex justify-content-center align-items-center" id="icono-perfil" href="?section=infoPerfil" title="Perfil">
+				<a class="text-decoration-none text-dark d-flex justify-content-center align-items-center" id="icono-perfil" href="?section=infoPerfil&t=3" title="Perfil">
 					<?php if($section === "infoPerfil"){?>
 					<?php ?>
 						<img src="assets\img\icons\Perfil_Click.svg" width="40px" height="40px" alt="Perfil usuario Imageen" class="icono-footer">

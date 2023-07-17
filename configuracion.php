@@ -1,7 +1,7 @@
 <!--En esta clase se envian los datos de la configuracion de la cuenta a la base de datos mediante un formulario-->
 <div class="container content-container" style="padding: 10px;">
     <div class="col-12 back-button text-left" style="margin-top: 50px;">
-        <a href="?section=infoPerfil">
+        <a href="?section=infoPerfil&t=3">
             <img src="assets\img\icons\Atrás.svg" alt="Atrás" style="width: 30px;">
         </a>
     </div>

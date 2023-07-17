@@ -49,7 +49,7 @@ if ($result->num_rows == 0) { // No existe. Le damos de alta
 		$fb_uid .=  $codigousuario;
 	}
 	$sql = "INSERT INTO USUARIOS (CODIGO, NOMBRE, APELLIDOS, UID, TELEFONO, FOTO, EMAIL, PROVIDER, TOKEN, IPALTA, FECHAALTA, HORAALTA, SUSCRIPCION, IDIOMA, IDIOMA2, VISUALIZACION, PERMISOS,VERSION_SISTEMA_OPERATIVO, DISPOSITIVO_MOVIL)
-	VALUES ('$codigousuario', '$datos->nombre', '', '$fb_uid', '$datos->telefono', '$datos->foto', '$datos->email', '$datos->provider', '', '$ipaddress', '$date', '$time', '1', '$l', '$l2', '1', '1','$sistema_operativo', '$dispositivo_movil')";
+	VALUES ('$codigousuario', '$datos->nombre', '', '$fb_uid', '$datos->telefono', '$datos->foto', '$datos->email', '$datos->provider', '', '$ipaddress', '$date', '$time', '1', '$l', '$l2', '1', '1','$sistema_operativo','$dispositivo_movil')";
 	$result=$conn->query($sql);
 }
 else {

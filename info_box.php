@@ -252,7 +252,7 @@ session_start();
 
     </div>
     <div class="fila-explorar">
-        <a href="?section=ficha">
+        <a href="?section=ficha&t=3">
             <button class="btn btn-explorar">Explorar</button>
         </a>
         <div class="img-group">

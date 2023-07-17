@@ -8,7 +8,7 @@
             <div class="col-12 back-button text-left" style="margin-top: 50px;">
              <!--Se establece este href para volver a atras a la pagina desde la que la llamamos, por ejemplo si lo llamamos desde perfil
             al volver hacia atras ira al perfil y si lo hacemos desde infoPerfil ira a infoPerfil.-->
-                <a href="?section=<?php echo $_GET['ref']; ?>">
+                <a href="?section=<?php echo $_GET['ref']; ?>&t=3">
                     <img src="assets\img\icons\Atrás.svg" alt="Atrás" style="width: 30px;">
                 </a>
             </div>

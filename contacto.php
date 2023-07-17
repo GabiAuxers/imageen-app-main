@@ -13,7 +13,7 @@
         <div class="row header">
 
             <div class="col-12 back-button text-left" style="margin-top: 50px;">
-            <a href="?section=<?php echo $_GET['ref']; ?>">
+            <a href="?section=<?php echo $_GET['ref']; ?>&t=3">
                     <img src="assets\img\icons\Atrás.svg" alt="Atrás" style="width: 30px;">
                 </a>
             </div>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-12 p-3" style="text-align: center;">
-            <form method="POST" action="?section=mapa">
+            <form method="POST" action="?section=mapa&t=3">
 
                 <input type="nombre" class="form-control txt-input" id="nombre" name="nombre" placeholder="Nombre"
                     required><br>

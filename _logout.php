@@ -3,7 +3,7 @@ include 'literal.php';
 include 'auth.php';
 session_start();
 //session_unset();
-//session_destroy();
+session_destroy();
 $conn = @new mysqli($db_server, $db_username, $db_userpassword, $db_name);
 if ($conn->connect_error) {
 	$additionalInfo = "Fallo en la conexión a la base de datos en la clase _logout.php línea 7. Comprueba las credenciales de la base de datos y que el servidor esté funcionando correctamente. Error específico: " . $conn->connect_error;

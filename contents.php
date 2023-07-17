@@ -74,13 +74,11 @@ if ($x != "" || $visualizacion_usuario == 1) {
         ?>
     </div>
     <?php
+
         include 'js.php';
         //Cargamos footer
+        include 'modals.php';
+        include 'sesiones.php';
         include 'footer.php';
     ?>
-        <?php
-         include 'modals.php';
-         include 'sesiones.php';
-    ?>
-     
 </body>

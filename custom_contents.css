@@ -204,6 +204,15 @@ body {
   font-weight: 200;
   text-align: left;
 }
+.card-custom {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: transparent;
+
+}
 
 iframe {
   height: calc(100vh - 4px);
@@ -253,7 +262,7 @@ iframe {
 .resultado-busqueda {
   height: 10px;
   font-family: "Montserrat";
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 .modal-footer {

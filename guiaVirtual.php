@@ -23,11 +23,11 @@
 
             <div class="swiper-slide">
                 <div class="container align-items-center">
-                    <img src="assets/img/logo/Mapa.svg" alt="Mapa" class="logo2">
+                    <img src="assets/img/logo/Mapa.svg" alt="Mapa" class="logo2" >
                     <div class="position-absolute" style="top: 10px; right: 10px;">
                         <img class="logo-cerrar" src="assets/img/icons/Cerrar.svg" alt="Cerrar">
                     </div>
-                    <div>
+                    <div style="height: 8rem;">
                         <p class="text-center mt-3 txt-presentacion">Explora virtualmente la ciudad que quieras con
                             Imageen.</p>
                         <p class="text-center mt-1 txt-presentacion">!Haz turismo y tránsportate al pasado!</p>
@@ -38,11 +38,11 @@
 
             <div class="swiper-slide">
                 <div class="container align-items-center">
-                    <img src="assets/img/logo/Monumentos.svg" alt="Mapa" class="logo2" style="margin-left: -18px;">
+                    <img src="assets\img\icons\tour-imageen.svg" alt="Explora categorias con Imageen" class="logo2">
                     <div class="position-absolute" style="top: 10px; right: 10px;">
                         <img class="logo-cerrar" src="assets/img/icons/Cerrar.svg" alt="Cerrar">
                     </div>
-                    <div>
+                    <div style="height: 8rem;">
                         <p class="text-center mt-3 txt-presentacion">Filtra por categoría y encontrarás los lugares
                             perfectos para tí.</p>
                         <p class="text-center mt-1 txt-presentacion">!Hay para todos los gustos!</p>
@@ -57,7 +57,7 @@
                     <div class="position-absolute" style="top: 10px; right: 10px;">
                         <img class="logo-cerrar" src="assets/img/icons/Cerrar.svg" alt="Cerrar">
                     </div>
-                    <div>
+                    <div style="height: 8rem;">
                         <p class="text-center mt-3 txt-presentacion">Guarda en tu lista de favoritos y entra cuando
                             quieras.</p>
                         <p class="text-center mt-1 txt-presentacion">!Es perfecto para preparar un viaje!</p>
@@ -71,7 +71,7 @@
                     <div class="position-absolute" style="top: 10px; right: 10px;">
                         <img class="logo-cerrar" src="assets/img/icons/Cerrar.svg" alt="Cerrar">
                     </div>
-                    <div>
+                    <div style="height: 8rem;">
                         <p class="text-center mt-3 txt-presentacion">Si tienes alguna pregunta o sugerencia contáctanos
                             desde la sección de contacto.</p>
                         <p class="text-center mt-1 txt-presentacion">!No dudes en escribirnos!</p>
@@ -101,7 +101,7 @@
         const closeBtn = document.querySelectorAll('.logo-cerrar');
         closeBtn.forEach((img) => {
             img.addEventListener('click', function() {
-                window.location.href = '?section=perfil';
+                window.location.href = '?section=perfil&t=3';
             });
         });
         // Seleccionar todos los botones 'Siguiente' y agregar controlador de eventos
@@ -113,7 +113,7 @@
         });
     });
     document.querySelector('.btn-explorar-guia').addEventListener('click', function() {
-        window.location.href = 'contents.php?section=mapa';
+        window.location.href = 'contents.php?section=mapa&t=3';
     });
     </script>
 </body>

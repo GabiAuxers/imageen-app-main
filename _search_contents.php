@@ -40,20 +40,16 @@ if (strlen($txt) >= 3) {
         if ($result->num_rows > 1) {
             ?>
      
-     <div class="card h-80 mt-3">
-        <div class="card-body">
-            <h6 class="resultado-busqueda text-center"><?=$result->num_rows . " "?><?=getTxt(101, $l) . " \"" . $txt . "\""?></h6>
-         </div>
+     <div class="card-custom mt-3">
+            <span class="resultado-busqueda text-center"><?=$result->num_rows . " "?><?=getTxt(101, $l) . " \"" . $txt . "\""?></span>
     </div>                 
                    
 <?php
 } else {
             ?>
 <br>
-<div class="card h-80">
-    <div class="card-body">
-         <h6 class="resultado-busqueda text-center"><?=(getTxt(102, $l) . " \"" . $txt . "\"")?></h6>
-     </div>
+<div class="card-custom mt-3">
+         <span class="resultado-busqueda text-center"><?=(getTxt(102, $l) . " \"" . $txt . "\"")?></span>
  </div>
                     
 <?php
@@ -117,10 +113,8 @@ if (strlen($txt) >= 3) {
 <?php } else {?>
 <!-- Texto No se encontraron resultados-->
 <br>
-<div class="card h-80">
-     <div class="card-body">
-            <h6 class="resultado-busqueda text-center"><?=getTxt(66, $l)?></h6>
-    </div>
+<div class="card-custom mt-3">
+    <span class="resultado-busqueda text-center"><?=getTxt(66, $l)?></span>
 </div>
                   
 <?php }
