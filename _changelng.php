@@ -13,7 +13,9 @@ if ($conn->connect_error) {
     $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
     die("Ha ocurrido un error al intentar conectar a la base de datos.");
 }
-$sql = "UPDATE USUARIOS SET IDIOMA ='$l', IDIOMA2 ='$l2' WHERE CODIGO = '$codigousuario'";
-$conn->query($sql);
+$stmt = $conn->prepare ("UPDATE USUARIOS SET IDIOMA =?, IDIOMA2 =? WHERE CODIGO = ?");
+$stmt->bind_param("sss", $l, $l2, $codigousuario);
+$stmt->execute();
+$stmt->close();
 $conn->close();		
 ?>

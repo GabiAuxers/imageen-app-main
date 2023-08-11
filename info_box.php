@@ -27,23 +27,31 @@ session_start();
     $_SESSION['nombre'] = $nombre;
     $_SESSION['descripcion'] = $descripcion;
 
-    $conn3 = @new mysqli($db_server, $db_username, $db_userpassword, $db_name);
-    if ($conn3->connect_error) {
-        $additionalInfo = "Fallo en la conexión a la base de datos en la clase info_box.php línea 30. Comprueba las credenciales de la base de datos y que el servidor esté funcionando correctamente. Error específico: " . $conn3->connect_error;
+    $conn = @new mysqli($db_server, $db_username, $db_userpassword, $db_name);
+    if ($conn->connect_error) {
+        $additionalInfo = "Fallo en la conexión a la base de datos en la clase info_box.php línea 30. Comprueba las credenciales de la base de datos y que el servidor esté funcionando correctamente. Error específico: " . $conn->connect_error;
         $errorLogger = new ErrorLogger(null);
         $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
         die("Ha ocurrido un error al intentar conectar a la base de datos.");
     }
-    mysqli_set_charset($conn3, 'utf8');
+    mysqli_set_charset($conn, 'utf8');
     // Consulta para obtener la dirección de la tabla puntos
-    $sql = "SELECT DIRECCION FROM PUNTOS WHERE CODIGO = '$codigo'";
-    $result3 = $conn3->query($sql);
-    if ($result3->num_rows > 0) {
-        while ($row3 = $result3->fetch_assoc()) {
+
+     $stmt = $conn-> prepare("SELECT PUNTOS.DIRECCION  FROM PUNTOS  WHERE PUNTOS.CODIGO = ?");
+     if ($stmt === false) {
+        die("Error: " . $conn->error);
+    }
+     $stmt->bind_param("s", $codigo);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
             //guardarmos la direccion correspondiente a la fila DIRECCION de la tabla puntos
-            $direccion = $row3["DIRECCION"];
+            $direccion = $row["DIRECCION"];
         }
     }
+    $stmt->close();
     ?>
 
 <div>
@@ -52,7 +60,7 @@ session_start();
             <a><?php echo $nombre; ?></a>
         </div>
         <a href="#">
-            <img src="assets\img\icons\Cerrar.svg" width="50px" height="50px" style="margin-top: -10px;" alt="Favoritos"
+            <img src="assets\img\icons\Cerrar.svg" width="50px" height="50px" style="margin-top: -10px;" alt="Cerrar popup"
                 onclick="ocultarInfoBox()">
         </a>
     </div>
@@ -68,15 +76,12 @@ session_start();
                 // Crear conexión a la base de datos
 
                 // Consulta para obtener las imágenes y descripciones adicionales de la tabla materiales
-                $sql3 = "SELECT PUNTOS.NOMBRE AS NOMBRE_PUNTO, PUNTOS.CIUDAD, PUNTOS.LOCALIZACION, PUNTOS.CLIENTE, PUNTOS.IMAGEN AS IMAGEN_PUNTO, MATERIALES.CODIGO AS CODIGO_MATERIAL, MATERIALES.NOMBRE" . $l . " AS NOMBRE_MATERIAL, MATERIALES.DESCRIPCION" . $l . " AS DESCRIPCION_MATERIAL, MATERIALES.TIPO AS TIPO_MATERIAL, MATERIALES.ACCESO AS ACCESO_MATERIAL, MATERIALES.INSTRUCCIONES" . $l . " AS INSTRUCCION_MATERIAL, MATERIALES.IMAGEN AS IMAGEN_MATERIAL
-                        FROM MATERIALES
-                        JOIN PUNTOS ON MATERIALES.PUNTO = PUNTOS.CODIGO
-                        WHERE MATERIALES.PUNTO = '$codigo' AND PUNTOS.CODIGO = '$codigo'
-                        ORDER BY MATERIALES.ORDEN";
-
-                $result3 = $conn3->query($sql3);
-
-                if ($result3->num_rows > 0) {
+                $stmt2 = $conn->prepare("SELECT PUNTOS.NOMBRE AS NOMBRE_PUNTO, PUNTOS.CIUDAD, PUNTOS.LOCALIZACION, PUNTOS.CLIENTE, PUNTOS.IMAGEN AS IMAGEN_PUNTO, MATERIALES.CODIGO AS CODIGO_MATERIAL, MATERIALES.NOMBRE" . $l . " AS NOMBRE_MATERIAL, MATERIALES.DESCRIPCION" . $l . " AS DESCRIPCION_MATERIAL, MATERIALES.TIPO AS TIPO_MATERIAL, MATERIALES.ACCESO AS ACCESO_MATERIAL, MATERIALES.INSTRUCCIONES" . $l . " AS INSTRUCCION_MATERIAL, MATERIALES.IMAGEN AS IMAGEN_MATERIAL FROM MATERIALES JOIN PUNTOS ON MATERIALES.PUNTO = PUNTOS.CODIGO WHERE MATERIALES.PUNTO = ? AND PUNTOS.CODIGO = ? ORDER BY MATERIALES.ORDEN");
+                $stmt2->bind_param("ss", $codigo, $codigo);
+                $stmt2->execute();
+                $result2 = $stmt2->get_result();
+                if ($result2->num_rows > 0) {
+                    $formIndex = 0;
             ?>
 
         <div class="slider-container2">
@@ -85,15 +90,16 @@ session_start();
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper-infobox">
                     <?php
-                                while ($row3 = $result3->fetch_assoc()) {
-                                    $codigo_material = $row3["CODIGO_MATERIAL"];
-                                    $nombre_material = str_replace("~", "'", $row3["NOMBRE_MATERIAL"]);
-                                    $imagen_material = $row3["IMAGEN_MATERIAL"];
-                                    $descripcion_material = str_replace("~", "'", $row3["DESCRIPCION_MATERIAL"]);
-                                    $acceso_material = $row3["ACCESO_MATERIAL"];
-                                    $tipo_material = $row3["TIPO_MATERIAL"];
-                                    $instrucciones_material = str_replace("~", "'", $row3["INSTRUCCION_MATERIAL"]);
-                                    $nombre_punto  = $row3["NOMBRE_PUNTO"];
+                                while ($row = $result2->fetch_assoc()) {
+                                    $formID = "myForm" . $formIndex;
+                                    $codigo_material = $row["CODIGO_MATERIAL"];
+                                    $nombre_material = str_replace("~", "'", $row["NOMBRE_MATERIAL"]);
+                                    $imagen_material = $row["IMAGEN_MATERIAL"];
+                                    $descripcion_material = str_replace("~", "'", $row["DESCRIPCION_MATERIAL"]);
+                                    $acceso_material = $row["ACCESO_MATERIAL"];
+                                    $tipo_material = $row["TIPO_MATERIAL"];
+                                    $instrucciones_material = str_replace("~", "'", $row["INSTRUCCION_MATERIAL"]);
+                                    $nombre_punto  = $row["NOMBRE_PUNTO"];
                                     // 
                                     if ($imagen_material) {
                                         $ruta_imagen = $ruta_admin . "/data/materiales/" . $imagen_material;
@@ -103,10 +109,13 @@ session_start();
                                     $carpeta_destino = "";
                                     $carpeta_destino2 = "";
                                     $carpeta_spanish = "";
-                                    $sql2 = "SELECT CODIGO, IDIOMA, CARPETA FROM VERSIONES WHERE PUNTO ='$codigo' AND MATERIAL ='$codigo_material'";
-                                    $result2 = $conn3->query($sql2);
-                                    if ($result2->num_rows > 0) {
-                                        while ($row2 = mysqli_fetch_array($result2)) {
+
+                                     $stmt3 = $conn->prepare("SELECT CODIGO, IDIOMA, CARPETA FROM VERSIONES WHERE PUNTO = ? AND MATERIAL = ?");
+                                        $stmt3->bind_param("ss", $codigo, $codigo_material);
+                                        $stmt3->execute();
+                                        $result3 = $stmt3->get_result();
+                                    if ($result3->num_rows > 0) {
+                                        while ($row2 = mysqli_fetch_array($result3)) {
                                             $codigo_version     = $row2["CODIGO"];
                                             $idioma_version        = $row2["IDIOMA"];
                                             $carpeta_version     = $row2["CARPETA"];
@@ -122,6 +131,7 @@ session_start();
                                             }
                                         }
                                     }
+                                    $stmt3->close();
     
                                     if ($carpeta_destino == "") {
                                         if ($carpeta_destino2 != "") {
@@ -130,6 +140,14 @@ session_start();
                                             $carpeta_destino = $carpeta_spanish;
                                         }
                                     }
+                                    $stmt4 = $conn->prepare("SELECT AVG(PUNTUACION) AS RATING FROM HVALORACION WHERE MATERIAL = ?");
+                            
+                                    $stmt4->bind_param("s", $codigo_material);
+                                    $stmt4->execute();
+                                    $result4 = $stmt4->get_result();
+                                    $row4 = $result4->fetch_assoc();
+                                    $rating = $row4["RATING"];
+                                    $stmt4->close();
                                 ?>
                     <div class="swiper-slide2 col-12 col-md-6 col-lg-4"
                         id="<?= $nombre_punto ?>#<?= $nombre_material ?>">
@@ -199,22 +217,32 @@ session_start();
                                 <?php  echo $nombre_tipo_material = dame_tipo_material($tipo_material, $l);?>
                             </div>
                             <div class="rating2">
+                            <?php
+                            // Separar la calificación en partes enteras y decimales
+                            $entera = floor($rating);
+                            $decimal = $rating - $entera;
+                            ?>
+                            <?php for($i = 1; $i <= 5; $i++): ?>
+                                <?php if($i <= $entera): ?>
+                                <!-- Renderizar una estrella llena si $i es menor o igual a la parte entera de la calificación -->
                                 <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <div class="">
-                                    <div class="texto-stars-infobox">
-                                        <a>5.0</a>
-                                    </div>
-                                </div>
+                                <?php elseif($i == $entera + 1 && $decimal >= 0.5): ?>
+                                <!-- Renderizar una estrella a la mitad si $i es igual a la parte entera de la calificación más uno y la parte decimal de la calificación es mayor o igual a 0.5 -->
+                                <i class="fas fa-star-half-alt"></i>
+                                <?php else: ?>
+                                <!-- Renderizar una estrella vacía en cualquier otro caso -->
+                                <i class="far fa-star"></i>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+                            <div class="texto-stars">
+                                <a><?=number_format($rating, 1)?></a>
+                            </div>
 
                             </div>
                             <!--Comentarios, aqui deberia de ir la un href para que lleve a la seccion de comentarios
                                 o al contenido de ficha donde estan estos.-->
                                 <div class="texto-comentarios-infobox">
-                                <p>20 Comentarios</p>
+                                <p>20 <?= getTxt(312, $l) ?></p>
                             </div>
                         </div>
 
@@ -222,7 +250,8 @@ session_start();
 
 
                     <?php
-                                }
+                               $formIndex++; }
+
                                 ?>
                 </div>
 
@@ -241,7 +270,8 @@ session_start();
         <p>No se encontraron imágenes y descripciones adicionales.</p>
         <?php
                 }   // Cerrar la conexión
-                $conn3->close();
+                $stmt2->close();
+                $conn->close();
             } else {
                 ?>
         <p>El código del punto no está disponible.</p>
@@ -251,22 +281,22 @@ session_start();
 
 
     </div>
-    <div class="fila-explorar">
-        <a href="?section=ficha&t=3">
-            <button class="btn btn-explorar">Explorar</button>
-        </a>
-        <div class="img-group">
-            <img src="assets\img\icons\Favoritos.svg" width="30px" height="30px" style="margin-top: 15px;"
-                alt="Favoritos">
-            <img src="assets\img\icons\Descargar.svg" width="30px" height="30px" style="margin-top: 15px;"
-                alt="Compartir">
+        <div class="fila-explorar">
+            <a href="?section=ficha&t=3">
+                <button class="btn btn-explorar"><?= getTxt(295, $l) ?></button>
+            </a>
+            <div class="img-group">
+                <?php
+                    echo '<img id="favorito-' . $formIndex . '" class="favoritos" src="assets/img/icons/Favoritos.svg" width="30px" height="30px" alt="Favoritos ciudades Imageen" data-codigo="' . $codigo . '">';         
+                ?>
+                <img src="assets\img\icons\Descargar.svg" width="30px" height="30px" alt="Compartir">
+                
         </div>
     </div>
-
 </div>
 
 
-<script>
+<script async>
 document.addEventListener('DOMContentLoaded', function() {
     var swiper = new Swiper('.swiper-slide2', {
         loop: false,
@@ -291,8 +321,52 @@ document.addEventListener('DOMContentLoaded', function() {
         observeSlideChildren: true,
     });
 });
-</script>
-<script>
 
+$(document).ready(function() {
+    const favoritos = document.querySelectorAll('.favoritos');
+    
+    // Comprueba el estado de favorito al cargar la página
+    fetch(`_getFavorito.php`)  // Nota: He cambiado el nombre del archivo PHP
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            favoritos.forEach((favorito) => {
+                let codigo = favorito.dataset.codigo;
+                if (data.codigosFavoritos.includes(codigo)) {
+                    favorito.src = "assets/img/icons/Favoritos_relleno.svg";
+                } else {
+                    favorito.src = "assets/img/icons/Favoritos.svg";
+                }
+            });
+        })
+        .catch(e => console.log('There has been a problem with your fetch operation: ' + e.message));
 
+    favoritos.forEach((favorito) => {
+        let codigo = favorito.dataset.codigo;
+
+        favorito.addEventListener('click', function () {
+            // Cambia la imagen inmediatamente cuando se hace clic en ella
+            if (favorito.src.includes('Favoritos_relleno')) {
+                favorito.src = "assets/img/icons/Favoritos.svg";
+            } else {
+                favorito.src = "assets/img/icons/Favoritos_relleno.svg";
+            }
+            // Hacer la petición fetch
+            fetch(`_toggleFavorito.php?codigo_material=${codigo}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Si la petición fetch indica que el estado no cambió, cambiar la imagen de nuevo
+                    if (!data.ES_FAVORITO && favorito.src.includes('Favoritos_relleno')) {
+                        favorito.src = "assets/img/icons/Favoritos.svg";
+                    } else if (data.ES_FAVORITO && favorito.src.includes('Favoritos')) {
+                        favorito.src = "assets/img/icons/Favoritos_relleno.svg";
+                    }
+                });
+        });
+    });
+});
 </script>

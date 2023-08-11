@@ -21,8 +21,11 @@ if ($auth == 1){
 		die("Ha ocurrido un error al intentar conectar a la base de datos.");
 	}
 	mysqli_set_charset($conn, 'utf8');
-	$sql = "UPDATE USUARIOS SET EMAIL ='$email_usuario', PERMISOS = 1, FECHADATOSPERSO = '$fecha_actualiza' WHERE CODIGO = '$codigousuario' AND TOKEN ='$token_usuario'";
-	$conn->query($sql);
-	$conn->close();			
+$stmt = $conn->prepare ("UPDATE USUARIOS SET EMAIL =?, PERMISOS = 1, FECHADATOSPERSO = ? WHERE CODIGO = ? AND TOKEN = ?");
+$stmt->bind_param("ssss", $email_usuario, $fecha_actualiza, $codigousuario, $token_usuario);
+$stmt->execute();
+$stmt->close();
+$conn->close();
+	
 }
 ?>

@@ -15,7 +15,7 @@
 			<a class="text-decoration-none text-dark" id="enlace-cambiar-visual" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="<?= getTxt(149, $l) ?>"></i></a>
 		<?php else : ?>
 			<div class="col">
-				<a class="text-decoration-none text-dark icono-seleccionado d-flex justify-content-center align-items-center" id="icono-mapa" href="?section=mapa" title="Mapa">
+				<a class="text-decoration-none text-dark icono-seleccionado d-flex justify-content-center align-items-center" id="icono-mapa" href="?section=mapa" title="<?= getTxt(149, $l) ?>">
 					<?php if($section === "mapa" || $section === null){?>
 					<?php ?>
 						<img src="assets\img\icons\Mapa_Click.svg" width="40px" height="40px" alt="Mapa Imageen" class="icono-footer">
@@ -36,7 +36,7 @@
 			</div>
 
 			<div class="col">
-				<a class="text-decoration-none text-dark d-flex justify-content-center align-items-center" id="icono-favoritos"   title="Favoritos" data-toggle="modal" data-target="#modalPremium" href="">
+				<a class="text-decoration-none text-dark d-flex justify-content-center align-items-center" id="icono-favoritos"   title="<?= getTxt(276, $l) ?>" href="?section=favoritos&t=3">
 					<?php if($section === "favoritos"){?>
 					<?php ?>
 						<img src="assets\img\icons\Favoritos_Click.svg" width="40px" height="40px" alt="Favoritos ciudades Imageen" class="icono-footer" >
@@ -47,7 +47,7 @@
 			</div>
 
 			<div class="col">
-				<a class="text-decoration-none text-dark d-flex justify-content-center align-items-center" id="icono-perfil" href="?section=infoPerfil&t=3" title="Perfil">
+				<a class="text-decoration-none text-dark d-flex justify-content-center align-items-center" id="icono-perfil" href="?section=infoPerfil&t=3" title="<?= getTxt(277, $l) ?>">
 					<?php if($section === "infoPerfil"){?>
 					<?php ?>
 						<img src="assets\img\icons\Perfil_Click.svg" width="40px" height="40px" alt="Perfil usuario Imageen" class="icono-footer">
@@ -57,7 +57,7 @@
 				</a>
 			</div>
 		<?php endif; ?>
-		<!-- <div class="col"><a  class="text-decoration-none text-dark" href="#" data-bs-toggle="offcanvas" data-bs-target="#datos-personales" aria-controls="datos-personales" data-bs-toggle="tooltip" data-bs-placement="top" title="<?= getTxt(151, $l) ?>"><i class="ri-account-circle-line"></i><div class="flag-user"><img id="flag" src="<?= give_me_flag($l); ?>" class="align-top"></div></a></div>-->
+		<!-- <div class="col"><a  class="text-decoration-none text-dark" href="#" data-bs-toggle="offcanvas" data-bs-target="#datos-personales" aria-controls="datos-personales" data-bs-toggle="tooltip" data-toggle="modal" data-target="#modalPremium" data-bs-placement="top" title="<?= getTxt(151, $l) ?>"><i class="ri-account-circle-line"></i><div class="flag-user"><img id="flag" src="<?= give_me_flag($l); ?>" class="align-top"></div></a></div>-->
 	</div>
 </div>
 

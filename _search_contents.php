@@ -9,17 +9,7 @@ include 'literal.php';
 include 'functions.php';
 include 'auth.php';
 
-    //datos enviados a través de un formulario usando el metodo POST
-    $codigo      = isset($_POST["codigo"]) ? $_POST["codigo"] : '';
-    $nombre      = isset($_POST["nombre"]) ? $_POST["nombre"] : '';
-    $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : '';
-    $direccion = isset($_POST["direccion"]) ? $_POST["direccion"] : '';
 
-
-    //Guardamos los datos en sesion para usarlos posteriormente en la ficha
-    $_SESSION['codigo'] = $codigo;
-    $_SESSION['nombre'] = $nombre;
-    $_SESSION['descripcion'] = $descripcion;
 
 $l = $_GET["l"];
 $txt = $_GET["t"];
@@ -34,29 +24,31 @@ if (strlen($txt) >= 3) {
         die("Ha ocurrido un error al intentar conectar a la base de datos.");
     }
     mysqli_set_charset($conn, 'utf8');
-    $sql = "SELECT PUNTOS.NOMBRE, CATEGORIA, DESCRIPCION" . $l . ", PUNTOS.CODIGO, IMAGEN, CLIENTE, GALERIA.ICONO, GALERIA.ICONOG FROM PUNTOS, GALERIA WHERE ( BUSQUEDA LIKE '%" . $txt . "%' OR PUNTOS.NOMBRE LIKE '%" . $txt . "%' OR DESCRIPCION" . $l . " LIKE '%" . $txt . "%') AND (PUNTOS.ICONO = GALERIA.CODIGO) ";
-    $result = $conn->query($sql);
+
+    $stmt = $conn->prepare("SELECT PUNTOS.NOMBRE, CATEGORIA, DESCRIPCION".$l.", PUNTOS.CODIGO, IMAGEN, CLIENTE, GALERIA.ICONO, GALERIA.ICONOG FROM PUNTOS, GALERIA WHERE ( BUSQUEDA LIKE '%".$txt."%' OR PUNTOS.NOMBRE LIKE '%".$txt."%' OR DESCRIPCION".$l." LIKE '%".$txt."%') AND (PUNTOS.ICONO = GALERIA.CODIGO) ");
+    $stmt->execute();
+    $result = $stmt->get_result();
     if ($result->num_rows > 0) {
         if ($result->num_rows > 1) {
             ?>
-     
-     <div class="card-custom mt-3">
-            <span class="resultado-busqueda text-center"><?=$result->num_rows . " "?><?=getTxt(101, $l) . " \"" . $txt . "\""?></span>
-    </div>                 
-                   
+
+<div>
+    <span class="resultado-busqueda text-center"><?=$result->num_rows . " "?><?=getTxt(101, $l) . " \"" . $txt . "\""?></span>
+</div>
+
 <?php
-} else {
+}else {
             ?>
 <br>
-<div class="card-custom mt-3">
-         <span class="resultado-busqueda text-center"><?=(getTxt(102, $l) . " \"" . $txt . "\"")?></span>
- </div>
-                    
+<div class="mt-3">
+    <span class="resultado-busqueda text-center"><?=(getTxt(102, $l) . " \"" . $txt . "\"")?></span>
+</div>
+
 <?php
 }
         ?>
 <div class="container-flulid" style="padding: 10px">
-    <div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
         <?php
         while ($row = mysqli_fetch_array($result)) {
             $nombre = $row["NOMBRE"];
@@ -70,54 +62,69 @@ if (strlen($txt) >= 3) {
             if ($iconog == null) {
                 $iconog = $icono;
             }
+                
+                $query = "SELECT PUNTOS.CODIGO, TOKENS.NOMBRE, TOKENS.DESCRIPCION, TOKENS.TOKEN FROM PUNTOS 
+                JOIN TOKENS ON PUNTOS.CODIGO = TOKENS.CODIGO
+                 WHERE TOKENS.CODIGO = ?";
+                
+
+                $stmt9 = $conn->prepare($query);
+                $stmt9->bind_param('s', $codigo);
+                $stmt9->execute();
+                $result9 = $stmt9->get_result();
+                $row9 = $result9->fetch_assoc();
+        
+                if ($row9) {
+                $token = $row9['TOKEN'];
+        
+        } else {
+            // Token inválido o expirado
+            die('Token invalido. Acceso denegado');
+        }
+        $stmt9->close();
+            
+                
 
             ?>
         <!--Bypass ventana punto-->
         <?php
         if ($cliente_punto == "") {
                 ?>
-        <a href="#contentx" class="text-decoration-none text-dark"
+        <a href="?section=ficha&t=3&ref=listado&token=<?=$token?>" class="text-decoration-none text-dark"
             onclick=" showFicha({'codigo': '<?=$codigo?>', 'descripcion': '<?=$descripcion?>', 'nombre': '<?=$nombre?>'})">
 
             <?php } else {?>
-            <a href="#pointx" class="text-decoration-none text-dark" 
-                onclick="loadPoint({'codigo': '<?=$codigo?>', 'imagen': '<?=$imagen_punto?>', 'cliente': '<?=$cliente_punto?>', 'nombre': '<?=$titulo_punto?>', 'descripcion': '<?=$descripcion_punto?>', 'icono': '<?=$iconog?>'})"
-                >
+            <a href="?section=ficha&t=3&ref=listado&token=<?=$token?>" class="text-decoration-none text-dark"
+                onclick="loadPoint({'codigo': '<?=$codigo?>', 'imagen': '<?=$imagen_punto?>', 'cliente': '<?=$cliente_punto?>', 'nombre': '<?=$titulo_punto?>', 'descripcion': '<?=$descripcion_punto?>', 'icono': '<?=$iconog?>'})">
                 <?php }?>
-                <div class="col" >
-                    <div class="card-buscador h-100 mt-2">
-                        <div class="card-body">
-                            <h5 class="titulo-card text-center"><?=$nombre?></h5>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <img src="https://admin.imageen.net/data/puntos/<?=$imagen_punto?>"
-                                        class="img-fluid rounded shadow"
-                                        style="object-fit: cover; height: 100%; transition: all 0.3s ease;"
-                                        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.3)';"
-                                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)';"
-                                        alt="<?=$nombre?>">
-                                </div>
-                                <div class="col-6">
-                                    <p class="card-text"><?=substr($descripcion, 0, 75)?>...</p>
-                                </div>
-                            </div>
+                <div class="col">
+                    <div class="m-1 align-items-center row rounded gx-2 p-2" style="background: #EEEEEE;">
+                        <h5 class="m-1 text-left"><?=$nombre?></h5>
+                        <div class="col-4"><img class="align-self-center img-fluid rounded"
+                                src="https://admin.imageen.net/data/puntos/<?=$imagen_punto?>"></div>
+                        <div class="col-8">
+                            <p class="card-text"><?=substr($descripcion,0,75)?>...</p>
                         </div>
                     </div>
                 </div>
+
             </a>
             <?php 
         }
+        
         ?>
+
     </div>
 </div>
 <?php } else {?>
 <!-- Texto No se encontraron resultados-->
 <br>
-<div class="card-custom mt-3">
+<div class="cardmt-3">
     <span class="resultado-busqueda text-center"><?=getTxt(66, $l)?></span>
 </div>
-                  
+
 <?php }
+    $stmt->close();
     $conn->close();
 } else {?>
 

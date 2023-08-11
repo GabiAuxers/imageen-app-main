@@ -61,9 +61,12 @@ if ($codigousuario != "" &&  $token != ""){
 		die("Ha ocurrido un error al intentar conectar a la base de datos.");
 	}
 	mysqli_set_charset($conn, 'utf8');
-	$sql = "SELECT NOMBRE, APELLIDOS, TELEFONO, EMAIL, FOTO, TOKEN, PROVIDER, SUSCRIPCION, FINSUSCRIPCION, STRIPECLIENTE, PERMISOS, VISUALIZACION, FECHAPIDEDATOS, IDIOMA, IDIOMA2 FROM USUARIOS WHERE CODIGO='$codigousuario' AND TOKEN ='$token'";
-	$result = $conn->query($sql);
+	$stmt = $conn->prepare ("SELECT NOMBRE, APELLIDOS, TELEFONO, EMAIL, FOTO, TOKEN, PROVIDER, SUSCRIPCION, FINSUSCRIPCION, STRIPECLIENTE, PERMISOS, VISUALIZACION, FECHAPIDEDATOS, IDIOMA, IDIOMA2 FROM USUARIOS WHERE CODIGO=? AND TOKEN =?");
+	$stmt->bind_param("ss", $codigousuario, $token);
+	$stmt->execute();
+	$result = $stmt->get_result();
 	$row = $result->fetch_assoc();
+
 	if ($result->num_rows > 0) {
 	  	$nombre_usuario			= $row["NOMBRE"];
 	    $apellidos_usuario		= $row["APELLIDOS"];
@@ -85,10 +88,11 @@ if ($codigousuario != "" &&  $token != ""){
 		if (isset($_COOKIE['cliente'])) {
 			$cliente = $_COOKIE['cliente'];
 			// use $cliente variable as needed
-		  } 
+		  } else {
+			$cliente = '';
+		}
 		//$cliente = $_COOKIE['cliente'];
 
-		$cliente = '';
 		if ($cliente == "1" && $nombre_usuario!= "Imageener") { 
 			if ($email_usuario!=NULL){
 				setcookie("cliente", "2", time() + (86400 * 360), "/"); 
@@ -101,6 +105,26 @@ if ($codigousuario != "" &&  $token != ""){
 			}else{
 				setcookie("cliente", "0", time() + (86400 * 360), "/"); 
 			}
+		}
+		
+		// Control para carga de ventana recopilación de correos al entrar
+		if (isset($_COOKIE['cliente2'])) {
+			$cliente2 = $_COOKIE['cliente2'];
+			// use $cliente variable as needed
+		  } else {
+			$cliente2 = '';
+		}
+		
+		if ($cliente2 != "0") { 
+			if ($email_usuario==NULL || $email_usuario=="imageener@imageen.net"){
+				$cliente2++;
+				setcookie("cliente2", $cliente2, time() + (86400 * 360), "/");
+			}else{
+				setcookie("cliente2", "0", time() + (86400 * 360), "/");
+			}
+		}
+		if ($cliente2 >="12") {
+			setcookie("cliente2", "1", time() + (86400 * 360), "/");
 		}
 
 		// Miramos a ver si ha caducado el Premium
@@ -125,6 +149,6 @@ if ($codigousuario != "" &&  $token != ""){
 		$codigousuario = "";
 	    $auth = 0;  	
 	}
+	$stmt->close();
 	$conn->close();	 	
 }
-?>

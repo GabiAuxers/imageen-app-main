@@ -971,20 +971,7 @@ function cambiosSuscripcion() {
 }
 </script>
 
-<div class="modal" tabindex="-1" id="confirma-datos-personales">
-    <div class="modal-dialog">
-        <div class="modal-content text-center">
-            <div class="modal-body">
-                <h3><?=getTxt(103,$l)?></h3>
-                <h6><?=getTxt(105,$l)?></h6>
-            </div>
-            <div class="modal-footer text-center mx-auto">
-                <button type="button" class="btn boton-principal" data-bs-dismiss="modal"
-                    onclick="location.reload();"><?=getTxt(104,$l)?></button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="modal" tabindex="-1" id="confirma-pagina-valoracion">
     <div class="modal-dialog">

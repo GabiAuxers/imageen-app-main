@@ -21,14 +21,18 @@ if ($auth == 1){
     mysqli_set_charset($conn, 'utf8');
     
     if ($field == 'nombre') {
-        $sql = "UPDATE USUARIOS SET NOMBRE ='$value', FECHADATOSPERSO = '$fecha_actualiza' WHERE CODIGO = '$codigousuario' AND TOKEN ='$token_usuario'";
+          $stmt = $conn->prepare ("UPDATE USUARIOS SET NOMBRE =?, FECHADATOSPERSO = ? WHERE CODIGO = ? AND TOKEN = ?");
+          $stmt->bind_param("ssss", $value, $fecha_actualiza, $codigousuario, $token_usuario);
     } else if ($field == 'email') {
-        $sql = "UPDATE USUARIOS SET EMAIL ='$value', FECHADATOSPERSO = '$fecha_actualiza' WHERE CODIGO = '$codigousuario' AND TOKEN ='$token_usuario'";
+         $stmt = $conn->prepare ("UPDATE USUARIOS SET EMAIL =?, FECHADATOSPERSO = ? WHERE CODIGO = ? AND TOKEN = ?");
+         $stmt->bind_param("ssss", $value, $fecha_actualiza, $codigousuario, $token_usuario);
     } else if ($field == 'telefono') {
-        $sql = "UPDATE USUARIOS SET TELEFONO ='$value', FECHADATOSPERSO = '$fecha_actualiza' WHERE CODIGO = '$codigousuario' AND TOKEN ='$token_usuario'";
+         "UPDATE USUARIOS SET TELEFONO ='$value', FECHADATOSPERSO = '$fecha_actualiza' WHERE CODIGO = '$codigousuario' AND TOKEN ='$token_usuario'";
+         $stmt = $conn->prepare ("UPDATE USUARIOS SET TELEFONO =?, FECHADATOSPERSO = ? WHERE CODIGO = ? AND TOKEN = ?");
+         $stmt->bind_param("ssss", $value, $fecha_actualiza, $codigousuario, $token_usuario);
     }
-
-    $conn->query($sql);
+    $stmt->execute();
+    $stmt->close();
     $conn->close();
 }
 ?>

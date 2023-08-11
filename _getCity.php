@@ -16,9 +16,10 @@ if ($v != ""){
         die("Ha ocurrido un error al intentar conectar a la base de datos.");
     	}
     mysqli_set_charset($conn, 'utf8');
-    $sql = "SELECT LATITUD, LONGITUD FROM CIUDADES WHERE CODIGO ='$v'" ;
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
+     $stmt = $conn->prepare ("SELECT LATITUD, LONGITUD FROM CIUDADES WHERE CODIGO =?");
+     $stmt->bind_param("s", $v);
+     $stmt->execute();
+     $result = $stmt->get_result();
     if ($result->num_rows > 0) {
         $latitud   = $row["LATITUD"];
         $longitud  = $row["LONGITUD"];     
@@ -26,6 +27,7 @@ if ($v != ""){
         $latitud   = "";
         $longitud  = "";
     }
+    $stmt->close();
     $conn->close();      
 }else{
     $latitud   = "";

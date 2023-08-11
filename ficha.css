@@ -32,21 +32,20 @@
   background: #0b0b0b !important; /* Cambia esto al color que prefieras para el bullet activo */
 }
 .nombres-container {
-  font-family: "Montserrat";
-  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  text-align: center;
+}
+.nombres-container p {
   font-weight: 600;
   font-size: 11px;
   text-align: center;
   padding-top: 10px;
-  padding-bottom: 10px;
 }
 .image-slide {
   border-radius: 30px;
   height: 355px !important;
   width: 227px !important;
-}
-.image-slide:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header {
@@ -59,14 +58,7 @@
 .comentarios-header {
   align-items: flex-start; /* Esto alinea los elementos a la izquierda */
 }
-@media (min-width: 576px) {
-  .header {
-    flex-direction: column;
-  }
-  .back-button {
-    margin-top: 60px;
-  }
-}
+
 .logo-wrapper {
   position: relative;
   margin-top: 0px !important;
@@ -74,20 +66,20 @@
   width: 100%;
 }
 .back-button {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: -65px;
   left: 0;
-  margin-top: 60px;
-
+  /* margin-top: 60px; */
   text-align: left;
-  width: 100%;
+  width: 65px;
+  z-index: 101;
 }
 
 .rating-ficha {
-  font-size: 19px;
-  flex-wrap: nowrap; /* Asegura que los elementos no se envuelvan
-  justify-content: space-between; /* Esto hará que los elementos se coloquen en los extremos opuestos */
   align-items: center;
+  margin: 0 auto;
+  max-width: 200px;
+  justify-items: center;
 }
 
 .rating-ficha .fas {
@@ -96,15 +88,14 @@
 }
 
 .texto-stars {
-  font-family: "Montserrat";
-  font-style: normal;
   font-weight: 700;
   font-size: 14px;
-  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  margin: 0 5px;
 }
 
 .texto-reviews {
-  font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -135,24 +126,92 @@
   line-height: 18px;
   display: flex;
   align-items: center;
-  opacity: 0.35;
+  opacity: 0.7;
   margin-top: 10px;
 }
+.share-icon {
+  width: 30px;
+  transition: all 0.3s ease;
+}
 
+.dropdown-item:hover .share-icon {
+  transform: scale(1.2);
+}
+.dropdown-menu > .dropdown-item {
+  border-top: none;
+}
+.btn-compartir {
+  background-color: transparent;
+  width: 100% !important;
+  height: 50px !important;
+  padding: 0.5rem 0.85rem !important;
+}
+.dropup .dropdown-toggle::after {
+ border-bottom: 0em solid !important; 
+}
 
-.texto-descripcion-ficha {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 18px;
+.dropdown-menu.show {
+  border-radius: 25px;
+  padding: 20px;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+@media not all and (min-resolution:.001dpcm) {
+  @supports (-webkit-appearance:none) {
+      /* Aquí puedes colocar tu CSS específico para Safari */
+      .dropdown-menu.show {
+        left: -137px !important;
+        transform: translate(0px, 0px) !important;
+        bottom: 49px!important;
+      }
+  }
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+  padding-left: 10px;
+}
+
+.grid-categorias {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+  height: 60px;
+}
+.texto-descripcion-ficha  {
   display: flex;
   align-items: center;
   line-height: 20px;
   text-align: center;
-  height: 6em;
+  margin-top: 5px;
 }
-
+.texto-descripcion-ficha p {
+  font-size: 14px;
+  line-height: 18px;
+}
+.texto-visualizaciones {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  opacity: 0.4;
+}
 .rating {
   font-size: 19px;
   display: flex;
@@ -163,15 +222,7 @@
   cursor: pointer;
 }
 
-.texto-stars {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-}
+
 .txt-ficha-titulo {
   flex-wrap: nowrap; /* Asegura que los elementos no se envuelvan
   justify-content: space-between; /* Esto hará que los elementos se coloquen en los extremos opuestos */
@@ -230,4 +281,36 @@ input.custom-searchcom-input {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.btn-check:focus+.btn, .btn:focus {
+  outline: 0;
+   box-shadow: none !important;
+}
+
+.position-play {
+  top: 50%;
+  margin-top: -44px;
+  left: 50%;
+  margin-left: -44px;
+}
+/* Ocultar las flechas del slider inicialmente */
+.swiper-button-next,
+.swiper-button-prev {
+  display: none;
+}
+
+/* Muestra las flechas del slider en pantallas pequeñas */
+@media (max-width: 494px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: block;
+  }
+}
+/* Cambiar color de las flechas del slider */
+:root {
+  --swiper-theme-color: #2765A0;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  top: 35% !important;
 }

@@ -19,8 +19,10 @@ include 'auth.php';
 
 				}
 				mysqli_set_charset($conn, 'utf8');
-				$sql = "SELECT TITULO$l, DESCRIPCION$l, IMAGEN FROM TOUR";
-				$result = $conn->query($sql);
+
+				 $stmt = $conn->prepare ("SELECT TITULO$l, DESCRIPCION$l, IMAGEN FROM TOUR");
+				 $stmt->execute();
+				 $result = $stmt->get_result();
 			?>
 
 			<div class="carousel-inner">
@@ -42,8 +44,10 @@ include 'auth.php';
 						<h6><?= $descripcion ?></h6>
 					</div>
 				</div>
-				<?php } ?>
-				<?php $conn->close(); ?>
+				<?php }  ?>
+				<?php
+				$stmt->close();
+				$conn->close(); ?>
 			</div>
 
 			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">

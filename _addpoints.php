@@ -24,7 +24,6 @@ if ($auth == 1){
     $stmt = $conn->prepare("SELECT USUARIO FROM HVALORACION WHERE PUNTO = ? AND MATERIAL = ?");
     $stmt->bind_param("ss", $p, $m);
     $stmt->execute();
-
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
@@ -43,6 +42,31 @@ if ($auth == 1){
     }
 
     $stmt->close();
+
+    $stmt2 = $conn->prepare("SELECT ID FROM HVALORACION WHERE PUNTO = ? AND MATERIAL = ? AND USUARIO = ?");
+    $stmt2->bind_param("sss", $p, $m, $codigousuario);
+    $stmt2->execute();
+    $result2 = $stmt2->get_result();    
+    $row2 = $result2->fetch_assoc();
+
+	$date = date('Y-m-d');
+	$time = date('h:i:sa');    
+    
+    if ($result2->num_rows == 0){
+		"INSERT INTO HVALORACION (FECHA, HORA, IP, USUARIO, PUNTO, MATERIAL, PUNTUACION) VALUES ('$date', '$time', '$ipaddress', '$codigousuario', '$p', '$m', '$x')";
+        $stmt2 = $conn->prepare("INSERT INTO HVALORACION (FECHA, HORA, IP, USUARIO, PUNTO, MATERIAL, PUNTUACION) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt2->bind_param("sssssss",$date, $time, $ipaddress, $codigousuario, $p, $m, $x);
+        $stmt2->execute();
+        
+
+	}else{
+		"UPDATE HVALORACION SET FECHA ='$date', HORA ='$time', IP = '$ipaddress', PUNTUACION ='$x' WHERE PUNTO ='$p' AND MATERIAL ='$m' AND USUARIO ='$codigousuario'";
+        $stmt2 = $conn->prepare("UPDATE HVALORACION SET FECHA = ?, HORA = ?, IP = ?, PUNTUACION = ? WHERE PUNTO = ? AND MATERIAL = ? AND USUARIO = ?");
+        $stmt2->bind_param("sssssss",$date, $time, $ipaddress, $x, $p, $m, $codigousuario);
+        $stmt2->execute();
+	}
+
+    $stmt2->close();
     $conn->close();
 }
 ?>

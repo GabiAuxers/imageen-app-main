@@ -12,7 +12,10 @@ if ($conn->connect_error) {
     $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
     die("Ha ocurrido un error al intentar conectar a la base de datos.");
 }
-$sql = "UPDATE USUARIOS SET FECHAPIDEDATOS = '$fecha_actualiza' WHERE CODIGO = '$codigousuario'";
-$conn->query($sql);
-$conn->close();		
+$stmt = $conn->prepare ("UPDATE USUARIOS SET FECHAPIDEDATOS = ? WHERE CODIGO = ?");
+$stmt->bind_param("ss", $fecha_actualiza, $codigousuario);
+$stmt->execute();
+$stmt->close();
+$conn->close();	
 ?>
+

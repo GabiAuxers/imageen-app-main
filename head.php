@@ -3,7 +3,8 @@
 
 <head>
     <!-- Facebook Propiedades -->
-    <Link rel="canonical" href="https://app.imageen.net" />
+    <link rel="canonical" href="https://app.imageen.net" />
+    <link rel="preload" as="image" href="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i5!2i15!3i12!4i256!2m3!1e0!2sm!3i656397053!2m6!1e2!2smaps_api!5i1!9m2!1e1!2b1!3m17!2ses-ES!3sUS!5e18!12m4!1e68!2m2!1sset!2sRoadmap!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy5lOmwudC5mfHAuYzojZmZhMGEzYTYscy50OjJ8cC52Om9mZixzLnQ6NHxwLnY6b2ZmLHMudDoyfHMuZTpsLml8cC5jOiNmZmQxZDNkNnxwLnY6b2ZmLHMudDozfHMuZTpsLml8cC5sOjQwLHMudDo1MXx6OjEzfHAudjpvZmZ8ejoxNHxwLnY6b24scy50OjM3fHAudjpvbixzLnQ6MzZ8cy5lOmd8ejoxMnxwLnY6b2ZmfHo6MTZ8cC5jOiNmZmZmZmFmY3xwLnY6b2ZmfHo6MTd8cC52Om9mZixzLnQ6NDB8cy5lOmwuaXxwLnY6b2ZmLHMudDozNXxzLmU6bC5pfHAudjpvZmZ8ejoxOHxwLnY6b2ZmLHMudDozNnxzLmU6bC5pfHAudjpvZmZ8ejoxMnxwLnY6b2ZmfHo6MTh8cC52Om9mZnx6OjE5fHAudjpvZmYscy50OjMzfHMuZTpsLml8ejoxNnxwLnY6b2ZmfHo6MTl8cC52Om9mZixzLnQ6Mzd8cy5lOmwuaXxwLnY6b24scy50OjM5fHMuZTpsLml8cC52Om9mZnx6OjE0fHAudjpvZmYscy50OjM4fHMuZTpsLml8cC52Om9mZixzLnQ6MTl8cy5lOmwudC5mfHAuYzojZmZhMGEzYTYscy50OjIwfHMuZTpsLnQuZnxwLmM6I2ZmYTBhM2E2LHMudDo1MzN8cC52Om9mZixzLnQ6NTI5fHMuZTpnfHAudjpvZmYscy50OjUzMnxzLmU6Z3x6OjEzfHAudjpvZmYscy50OjEyOTl8cy5lOmd8cC5jOiNmZmZmZjNjN3x6OjExfHAuYzojZmZmZmYwYjh8ejoxMnxwLmM6I2ZmZmZlY2E4fHo6MTN8cC5jOiNmZmZmZWViM3x6OjE0fHAuYzojZmZmZmY1ZDF8ejoxNXxwLmM6I2ZmZmZmN2RifHo6MTZ8cC5jOiNmZmZmZjllNSxzLnQ6NTMzfHMuZTpsLml8cC52Om9mZixzLnQ6NTI5fHMuZTpsLml8cC52Om9mZixzLnQ6NTMyfHMuZTpsLml8ejoxM3xwLnY6b2ZmLHMudDo1MzF8cy5lOmwuaXx6OjE0fHAudjpvZmZ8ejoxOHxwLnY6b2ZmLHMudDo1MzB8cy5lOmwuaXx6OjE1fHAudjpvZmZ8ejoxNnxwLnY6b2Zm!4e0!5m1!5f2!23i1376099!23i1379903!26m3!1e5!1e2!1e3&key=AIzaSyB97Z4gnECGXzhNx4HKOg1vdVUnw-7cIzA&token=79318">
     <meta property="og:url" content="https://app.imageen.net" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Con Imageen revive la historia" />
@@ -13,63 +14,63 @@
     <meta property="fb:app_id" content="467353625276049" />
     <!-- End Facebook Propiedades -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="generator" content="">
 
-<?php 
-//Comprobamos si existe el parámetro de la url sectión para controlar el Route
-$section = filter_input(INPUT_GET, 'section', FILTER_SANITIZE_STRING);
-?>
-    
     <?php
-        $v = isset($_GET["v"]) && !empty($_GET["v"]) ? $_GET["v"] : "";
+    //Comprobamos si existe el parámetro de la url sectión para controlar el Route
+    $section = htmlspecialchars($_GET['section'] ?? '', ENT_QUOTES, 'UTF-8');
+    ?>
 
-        if (($v)) {
-            switch ($v) {
-                case "1000":
-                    $ciudad = "Madrid";
-                    break;
-                case "1002":
-                    $ciudad = "Tarragona";
-                    break;
-                case "1003":
-                    $ciudad = "Mérida";
-                    break;
-                case "1004":
-                    $ciudad = "Cartagena";
-                    break;
-                case "1032":
-                    $ciudad = "Montblanc";
-                    break;
-                case "1033":
-                    $ciudad = "Corrales";
-                    break;
-                default:
-                    $ciudad = null;
-                    break;
-            }
-        } else {
-            $ciudad = null; // o asignar otro valor predeterminado
-        }
+    <?php
+    $v = isset($_GET["v"]) && !empty($_GET["v"]) ? $_GET["v"] : "";
 
-        if (imageen_en_useragent()) {
-            $capado_apple = true;
-        } else {
-            //$capado_apple = false;
-            $capado_apple = true;
+    if (($v)) {
+        switch ($v) {
+            case "1000":
+                $ciudad = "Madrid";
+                break;
+            case "1002":
+                $ciudad = "Tarragona";
+                break;
+            case "1003":
+                $ciudad = "Mérida";
+                break;
+            case "1004":
+                $ciudad = "Cartagena";
+                break;
+            case "1032":
+                $ciudad = "Montblanc";
+                break;
+            case "1033":
+                $ciudad = "Corrales";
+                break;
+            default:
+                $ciudad = null;
+                break;
         }
+    } else {
+        $ciudad = null; // o asignar otro valor predeterminado
+    }
+
+    if (imageen_en_useragent()) {
+        $capado_apple = true;
+    } else {
+        //$capado_apple = false;
+        $capado_apple = true;
+    }
     ?>
     <?php
-        //new PHP Version, modified: 02/03/2023/ -
-        if ($ciudad != null) {
-            echo "<title>Imagee" . $ciudad . "</title>";
-            echo "<link rel=manifest href='./manifests/manifest-'" . $ciudad . ".json>";
-        } else {
-            echo "<title>Imageen</title>";
-            echo "<link rel=manifest href='./manifests/manifest.json'>";
-        }
+    //new PHP Version, modified: 02/03/2023/ -
+    if ($ciudad != null) {
+        echo "<title>Imagee" . $ciudad . "</title>";
+        echo "<link rel=manifest href='./manifests/manifest-'" . $ciudad . ".json>";
+    } else {
+        echo "<title>Imageen</title>";
+        echo "<link rel=manifest href='./manifests/manifest.json'>";
+    }
     ?>
     <link rel="canonical" href="https://app.imageen.net">
     <!-- Favicon -->
@@ -115,7 +116,7 @@ $section = filter_input(INPUT_GET, 'section', FILTER_SANITIZE_STRING);
     <!--src library.js-->
     <script src="library.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQTX87S8M6"></script>
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-CQTX87S8M6"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -131,14 +132,10 @@ $section = filter_input(INPUT_GET, 'section', FILTER_SANITIZE_STRING);
     <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-check-compat.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>   
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Biblioteca para detectar la version del navegador -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/2.0.0-alpha.1/ua-parser.min.js"></script>
     <!-- reCAPTCHA -->
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script defer src='https://www.google.com/recaptcha/api.js'></script>
 
 
     <script>
@@ -157,20 +154,14 @@ $section = filter_input(INPUT_GET, 'section', FILTER_SANITIZE_STRING);
         const appCheck = firebase.appCheck();
     </script>
 
-    <!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700" rel="stylesheet">
-    <link href="assets/css/vendor.min.css" rel="stylesheet">
-    <link href="assets/css/default/app.min.css" rel="stylesheet">
-    <link href="assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet">
-    <link href="assets/plugins/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">	
-    <link href="assets/plugins/switchery/dist/switchery.min.css" rel="stylesheet">-->
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Fuentes de Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Remix Icon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -181,7 +172,7 @@ $section = filter_input(INPUT_GET, 'section', FILTER_SANITIZE_STRING);
     <!-- Swiper -->
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
-   
+
 
     <!-- Hojas de estilo -->
     <link href="ficha.css" rel="stylesheet">
@@ -189,7 +180,7 @@ $section = filter_input(INPUT_GET, 'section', FILTER_SANITIZE_STRING);
     <link href="custom_contents.css" rel="stylesheet">
     <link href="contents.css" rel="stylesheet">
     <link href="custom.css" rel="stylesheet">
-    <link href="infoPerfil.css" rel="stylesheet" />
+    <link href="infoPerfil.css" rel="stylesheet">
     <link rel="stylesheet" href="custom.css">
     <link href="infobox.css" rel="stylesheet">
     <link href="login.css" rel="stylesheet">
@@ -201,7 +192,7 @@ $section = filter_input(INPUT_GET, 'section', FILTER_SANITIZE_STRING);
 
 
     <!-- Swiper -->
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script async src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <!-- Deshabilitar botón back del navegador-->
     <script>
         window.addEventListener('popstate', () => {
@@ -238,7 +229,7 @@ $section = filter_input(INPUT_GET, 'section', FILTER_SANITIZE_STRING);
     </noscript>
     <!-- End Facebook Pixel Code -->
 
-    <!-- TikTok Pixel Code -->
+    <!-- TikTok Pixel Code
     <script>
         ! function(w, d, t) {
             w.TiktokAnalyticsObject = t;
@@ -267,7 +258,7 @@ $section = filter_input(INPUT_GET, 'section', FILTER_SANITIZE_STRING);
             ttq.load('CDR3A0JC77U7SE2I6JB0');
             ttq.page();
         }(window, document, 'ttq');
-    </script>
+    </script> -->
     <!-- End TikTok Pixel Code -->
 
     <!-- Event snippet for Website traffic conversion page -->

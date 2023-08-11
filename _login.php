@@ -23,15 +23,17 @@ if ($conn->connect_error) {
 }
 mysqli_set_charset($conn, 'utf8');
 
-$sql = "SELECT CODIGO, NOMBRE, TELEFONO, FOTO, PROVIDER, EMAIL FROM USUARIOS WHERE UID = '$fb_uid'";
-$result = $conn->query($sql);
+$stmt = $conn->prepare ("SELECT CODIGO, NOMBRE, TELEFONO, FOTO, PROVIDER, EMAIL FROM USUARIOS WHERE UID = ?");
+$stmt->bind_param("s", $fb_uid);
+$stmt->execute();
+$result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
 if ($result->num_rows == 0) { // No existe. Le damos de alta
 	$codigo = get_item_code(1);
 	$control = RandomString(6);
 	$codigousuario = $codigo.strtoupper($control);
-
+	$_SESSION['codigo_usuario'] = $row['CODIGO'];
 	// 2º idioma
 	if ($l == 1){
 		$l2 = 1;
@@ -48,10 +50,21 @@ if ($result->num_rows == 0) { // No existe. Le damos de alta
 	if($fb_uid == "anonimo") {
 		$fb_uid .=  $codigousuario;
 	}
-	$sql = "INSERT INTO USUARIOS (CODIGO, NOMBRE, APELLIDOS, UID, TELEFONO, FOTO, EMAIL, PROVIDER, TOKEN, IPALTA, FECHAALTA, HORAALTA, SUSCRIPCION, IDIOMA, IDIOMA2, VISUALIZACION, PERMISOS,VERSION_SISTEMA_OPERATIVO, DISPOSITIVO_MOVIL)
-	VALUES ('$codigousuario', '$datos->nombre', '', '$fb_uid', '$datos->telefono', '$datos->foto', '$datos->email', '$datos->provider', '', '$ipaddress', '$date', '$time', '1', '$l', '$l2', '1', '1','$sistema_operativo','$dispositivo_movil')";
-	$result=$conn->query($sql);
+
+	$stmt2 = $conn->prepare("INSERT INTO USUARIOS (CODIGO, NOMBRE, APELLIDOS, UID, TELEFONO, FOTO, EMAIL, PROVIDER, TOKEN, IPALTA, FECHAALTA, HORAALTA, SUSCRIPCION, IDIOMA, IDIOMA2, VISUALIZACION, PERMISOS, VERSION_SISTEMA_OPERATIVO, DISPOSITIVO_MOVIL) 
+	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+	$empty_string = "";
+	$one = '1';
+	$stmt2->bind_param("sssssssssssssssssss",
+	$codigousuario, $datos->nombre, $empty_string, $fb_uid, $datos->telefono,
+	$datos->foto, $datos->email, $datos->provider, $empty_string,
+	$ipaddress, $date, $time, $one, $l, $l2, $one, $one,
+	$sistema_operativo, $dispositivo_movil
+);
+	$result2 = $stmt2->execute();
+	$stmt2->close();
 }
+
 else {
 	$codigousuario = $row["CODIGO"];
 	if (empty($nombre = $row["NOMBRE"])) $nombre = $datos->nombre;
@@ -59,23 +72,33 @@ else {
 	if (empty($foto = $row["FOTO"])) $foto = $datos->foto;
 	$provider = $datos->provider;
 	if (empty($email = $row["EMAIL"])) $email = $datos->email;
-	$sql = "UPDATE USUARIOS SET NOMBRE ='$nombre', TELEFONO = '$telefono', FOTO = '$foto', PROVIDER = '$provider', EMAIL = '$email' WHERE CODIGO = '$codigousuario'";
-	$result=$conn->query($sql);
+	 "UPDATE USUARIOS SET NOMBRE ='$nombre', TELEFONO = '$telefono', FOTO = '$foto', PROVIDER = '$provider', EMAIL = '$email' WHERE CODIGO = '$codigousuario'";
+	$stmt3 = $conn->prepare("UPDATE USUARIOS SET NOMBRE =?, TELEFONO =?, FOTO =?, PROVIDER =?, EMAIL =? WHERE CODIGO =?");
+	$stmt3->bind_param("ssssss", $nombre, $telefono, $foto, $provider, $email, $codigousuario);
+	$result3 = $stmt3->execute();
+	$stmt3->close();
 }
+$stmt->close();
+
 
 $randstring = RandomString(40);
 setcookie("usuario", $codigousuario, time() + (86400 * 360), "/");     
 setcookie("token", $randstring, time() + (86400 * 360), "/");  
 setcookie("lng", $l, time() + (86400 * 360), "/"); 
 
-$sql = "UPDATE USUARIOS SET IDIOMA ='$l', TOKEN = '$randstring' WHERE CODIGO = '$codigousuario'";
-$conn->query($sql);
+
+$stmt4 = $conn->prepare("UPDATE USUARIOS SET IDIOMA =?, TOKEN =? WHERE CODIGO = ?");
+$stmt4->bind_param("sss", $l, $randstring, $codigousuario);
+$stmt4->execute();
+$stmt4->close();
 
 $dat = date('Y-m-d');
 $tim = date('h:i:sa');
-$sql = "INSERT INTO HACCESOS (fecha, hora, ip, usuario) VALUES ('$dat', '$tim', '$ipaddress', '$codigousuario')";
-$conn->query($sql);
 
+$stmt5 = $conn->prepare("INSERT INTO HACCESOS (fecha, hora, ip, usuario) VALUES (?, ?, ?, ?)");
+$stmt5->bind_param("ssss", $dat, $tim, $ipaddress, $codigousuario);
+$stmt5->execute();
+$stmt5->close();
 
 $conn->close();	
 

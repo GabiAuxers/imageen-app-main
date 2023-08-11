@@ -1,0 +1,166 @@
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 1vh;
+  background-color: transparent;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+
+.logo-wrapper {
+  position: relative;
+  margin-top: 0px !important;
+  text-align: center;
+  width: 100%;
+}
+.txt-perfil {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 26px;
+  color: black;
+}
+.txt-nombre-perfil {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.txt-subtitulos {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+}
+#profilePic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.profile-content {
+  display: flex;
+  align-items: center; /* Centra los elementos verticalmente */
+  gap: 20px; /* Espacio entre la imagen y el nombre */
+  margin-top: 15px;
+}
+
+.listado {
+  display: flex;
+  flex-direction: column;
+}
+.listado ul {
+  list-style: disc; /* Cambia los marcadores de la lista a discos */
+  padding-left: 20px;
+}
+.listado li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.listado img {
+  width: 50px; /* Ajusta el tamaño de la imagen según lo necesites */
+  height: 50px;
+}
+.listado2 {
+  display: flex;
+  flex-direction: column;
+}
+.listado2 ul {
+  list-style: disc; /* Cambia los marcadores de la lista a discos */
+  padding-left: 20px;
+}
+.listado2 li {
+  justify-content: space-between;
+  align-items: center;
+}
+.txt-cerrarSesion {
+  font-family: "Montserrat" !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  text-decoration: underline !important;
+  color: black;
+}
+.txt-listado {
+  font-family: "Montserrat" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 18px !important;
+  text-decoration: none !important;
+  color: black;
+}
+.txt-iniciarSesion {
+  font-family: "Montserrat" !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+  color: rgb(255, 255, 255);
+  text-decoration: underline !important;
+}
+
+.txt-parrafo {
+  font-family: "Montserrat" !important;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px !important;
+}
+
+.fila-titulo-perfil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.iniciarBtn {
+  padding: 10px 20px;
+  border: unset;
+  border-radius: 15px;
+  z-index: 1;
+  background: #2765A0;;
+  position: relative;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  transition: all 250ms;
+  overflow: hidden;
+  display: inline-block; /* Añadido para permitir que ::before funcione correctamente con elementos en línea */
+  text-decoration: none !important;
+}
+
+ .iniciarBtn::before {
+  content: "";
+  position: absolute;
+  border: unset;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-color: #000000;
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  transition: all 250ms
+ }
+ 
+ .iniciarBtn:hover {
+  color: #ffffff;
+  text-decoration: none; /* Quita el subrayado en hover */
+ }
+ 
+ .iniciarBtn:hover::before {
+  width: 100%;
+ }
+
+
+

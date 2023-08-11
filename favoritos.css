@@ -60,12 +60,6 @@ body, html {
     width: 180px;
   }
 
-
- 
-.icono {
-  /* removed the inline style and added a class instead */
-}
-
   .rating {
    font-size:19px;
   display: flex;
@@ -271,18 +265,12 @@ font-size: 16px;
   fill: #D6D6D6;
 }
 
-
-
-
 .image-slide2 {
   width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 10px;
 }
-
-
-
 
 .content-container2 {
   display: block;
@@ -303,3 +291,4 @@ font-size: 16px;
   width: 100%;
 
 }
+

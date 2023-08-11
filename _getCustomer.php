@@ -21,24 +21,27 @@ if ($customer != ""){
         die("Ha ocurrido un error al intentar conectar a la base de datos.");
 	}
     mysqli_set_charset($conn, 'utf8');
-    $sql = "SELECT LATITUD_INICIO, LONGITUD_INICIO, ZOOM_INICIO FROM CLIENTES WHERE CODIGO ='$customer'" ;
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare ("SELECT LATITUD_INICIO, LONGITUD_INICIO, ZOOM_INICIO FROM CLIENTES WHERE CODIGO =?");
+    $stmt->bind_param("s", $customer);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     if ($result->num_rows > 0) {
         $latitud_inicio   = $row["LATITUD_INICIO"];
         $longitud_inicio  = $row["LONGITUD_INICIO"];
         $zoom_inicio      = $row["ZOOM_INICIO"];      
     }else{
-        $latitud_inicio   = "40.4342397922468";
-        $longitud_inicio  = "-3.6748230030173556";
-        $zoom_inicio      = "5";            
+        $latitud_inicio   = "";
+        $longitud_inicio  = "";
+        $zoom_inicio      = "";           
     }
+    $stmt->close();
     $conn->close();      
 }else{
     //$customer         = ""; 
-    $latitud_inicio   = "37.3s342397922468";
-    $longitud_inicio  = "-3.6748230030173556";
-    $zoom_inicio      = "6"; 
+    $latitud_inicio   = "";
+    $longitud_inicio  = "";
+    $zoom_inicio      = ""; 
 }
 
 $data = array('message0' => $customer, "message1" => $latitud_inicio, "message2" => $longitud_inicio, "message3" => $zoom_inicio);

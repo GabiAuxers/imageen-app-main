@@ -20,25 +20,37 @@ if ($conn->connect_error) {
 	die("Ha ocurrido un error al intentar conectar a la base de datos.");
 }
 mysqli_set_charset($conn, 'utf8');
-$sql = "SELECT PUNTO FROM MATERIALES WHERE CODIGO='$codigo_material'";
-$result = $conn->query($sql);
+ "SELECT PUNTO FROM MATERIALES WHERE CODIGO='$codigo_material'";
+ $stmt = $conn->prepare ("SELECT PUNTO FROM MATERIALES WHERE CODIGO=?");
+ $stmt->bind_param("s", $codigo_material);
+ $stmt->execute();
+ $result = $stmt->get_result();
 if ($result->num_rows > 0) { 
 	$row = mysqli_fetch_array($result);
 	$p	= $row["PUNTO"];
 }
-$sql = "SELECT NOMBRE, CIUDAD, LOCALIZACION, CLIENTE, IMAGEN FROM PUNTOS WHERE CODIGO ='$p'";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
+$stmt->close();
+
+ 
+ $stmt2 = $conn->prepare ("SELECT NOMBRE, CIUDAD, LOCALIZACION, CLIENTE, IMAGEN FROM PUNTOS WHERE CODIGO =?");
+ $stmt2->bind_param("s", $p);
+ $stmt2->execute();
+ $result = $stmt2->get_result();
 if ($result->num_rows > 0) {
+	$row = mysqli_fetch_array($result);
   	$nombre_punto 	= $row["NOMBRE"];
     $nombre_ciudad	= $row["CIUDAD"];
     $localizacion   = $row["LOCALIZACION"];	    
     $cliente        = $row["CLIENTE"];
 	$imagen			= $row["IMAGEN"];	
 }
+$stmt2 ->close();
 
-$sql = "SELECT CODIGO, NOMBRE".$l.", DESCRIPCION".$l.", TIPO, ACCESO, INSTRUCCIONES".$l.", IMAGEN FROM MATERIALES WHERE PUNTO ='$p' ORDER BY ORDEN";
-$result = $conn->query($sql);
+ "SELECT CODIGO, NOMBRE".$l.", DESCRIPCION".$l.", TIPO, ACCESO, INSTRUCCIONES".$l.", IMAGEN FROM MATERIALES WHERE PUNTO ='$p' ORDER BY ORDEN";
+ $stmt3 = $conn->prepare ("SELECT CODIGO, NOMBRE".$l.", DESCRIPCION".$l.", TIPO, ACCESO, INSTRUCCIONES".$l.", IMAGEN FROM MATERIALES WHERE PUNTO =? ORDER BY ORDEN");
+ $stmt3->bind_param("s", $p);
+ $stmt3->execute();
+ $result = $stmt3->get_result();
 ?>
 
 <?php if ($result->num_rows > 0) : ?>
@@ -70,8 +82,11 @@ $result = $conn->query($sql);
 					$carpeta_destino = "";	
 					$carpeta_destino2 = "";
 					$carpeta_spanish = "";
-					$sql2 = "SELECT CODIGO, IDIOMA, CARPETA FROM VERSIONES WHERE PUNTO ='$p' AND MATERIAL ='$codigo_material'";
-					$result2 = $conn->query($sql2);
+
+					$stmt4 = $conn->prepare ("SELECT CODIGO, IDIOMA, CARPETA FROM VERSIONES WHERE PUNTO =? AND MATERIAL =?");
+					 $stmt4->bind_param("ss", $p, $codigo_material);
+					 $stmt4->execute();
+					 $result2 = $stmt4->get_result();
 					if ($result2->num_rows > 0) { 
 						while($row2 = mysqli_fetch_array($result2) ) {	
 							$codigo_version 	= $row2["CODIGO"];
@@ -89,6 +104,8 @@ $result = $conn->query($sql);
 							}					
 						} 
 					} 
+					$stmt4->close();
+
 					if ($carpeta_destino == ""){
 						if ($carpeta_destino2 != ""){
 							$carpeta_destino = $carpeta_destino2;
@@ -245,6 +262,7 @@ $result = $conn->query($sql);
 
 <?php endif; ?>
 <?php
+	$stmt3->close();
     $conn->close();
 ?>
 

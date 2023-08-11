@@ -20,21 +20,25 @@ if ($auth == 1){
 		$errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
 		die("Ha ocurrido un error al intentar conectar a la base de datos.");
 	}
-    $sql = "SELECT ID FROM HVALORACIONAPP WHERE USUARIO ='$codigousuario'";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
+   // Preparar la sentencia SQL
+   $stmt = $conn->prepare("SELECT ID FROM HVALORACIONAPP WHERE USUARIO = ?");
+   $stmt->bind_param("s", $codigousuario); // "s" significa que el parametro es una cadena (string)
+   $stmt->execute();
+   $result = $stmt->get_result();
 
-	$date = date('Y-m-d');
-	$time = date('h:i:sa');    
-    
-    if ($result->num_rows == 0){
-		$sql = "INSERT INTO HVALORACIONAPP (FECHA, HORA, IP, USUARIO, APP, CONTENIDOS, PRECIO, VERBATIM) VALUES ('$date', '$time', '$ipaddress', '$codigousuario', '$app', '$contenidos', '$precio', '$verbatim')";
-		$conn->query($sql);
-	}else{
-		$conn = new mysqli($db_server, $db_username, $db_userpassword, $db_name);
-		$sql = "UPDATE HVALORACION SET FECHA ='$date', HORA ='$time', IP = '$ipaddress', APP ='$app', CONTENIDOS='$contenidos', PRECIO='$precio', VERBATIM='$verbatim' WHERE USUARIO ='$codigousuario'";
-		$conn->query($sql);
-	}
-	$conn->close();			
+   $date = date('Y-m-d');
+   $time = date('h:i:sa');    
+
+   if ($result->num_rows == 0){
+	   $stmt = $conn->prepare("INSERT INTO HVALORACIONAPP (FECHA, HORA, IP, USUARIO, APP, CONTENIDOS, PRECIO, VERBATIM) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+	   $stmt->bind_param("ssssssss", $date, $time, $ipaddress, $codigousuario, $app, $contenidos, $precio, $verbatim);
+	   $stmt->execute();
+   }else{
+	   $stmt = $conn->prepare("UPDATE HVALORACIONAPP SET FECHA =?, HORA =?, IP =?, APP =?, CONTENIDOS =?, PRECIO =?, VERBATIM =? WHERE USUARIO =?");
+	   $stmt->bind_param("ssssssss", $date, $time, $ipaddress, $app, $contenidos, $precio, $verbatim, $codigousuario);
+	   $stmt->execute();
+   }
+   $stmt->close();
+   $conn->close();          
 }
 ?>

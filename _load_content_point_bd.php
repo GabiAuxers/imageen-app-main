@@ -4,11 +4,6 @@ include 'literal.php';
 include 'functions.php';
 include 'auth.php';
 //Carga de medio directo gracias a enlace o codigo del material
-if (strpos($_SERVER['SERVER_NAME'], 'localhost') === 0) {
-    $ruta_admin = __DIR__ . '/admin';
-} else {
-    $ruta_admin = 'https://admin.imageen.net';
-}
 $m= $_POST["media"];
 $codigo_material= $m;
 //Conjunto para obtener los datos necesarios dependiendo del código de material
@@ -20,28 +15,42 @@ if ($conn->connect_error) {
 	die("Ha ocurrido un error al intentar conectar a la base de datos.");
 }
 mysqli_set_charset($conn, 'utf8');
-$sql = "SELECT CODIGO, CARPETA FROM VERSIONES WHERE MATERIAL='$codigo_material' AND IDIOMA='$l'";
-$result = $conn->query($sql);
+$stmt = $conn->prepare ("SELECT CODIGO, CARPETA FROM VERSIONES WHERE MATERIAL=? AND IDIOMA=?");
+$stmt->bind_param("ss", $codigo_material, $l);
+$stmt->execute();
+$result = $stmt->get_result();
 if ($result->num_rows > 0) { 
 	$row = mysqli_fetch_array($result);
 	$codigo_version 	= $row["CODIGO"];
 	$carpeta_destino	= $row["CARPETA"];
 }
-$sql2 = "SELECT NOMBRE".$l.", INSTRUCCIONES".$l.",PUNTO FROM MATERIALES WHERE CODIGO='$codigo_material'";
-$result = $conn->query($sql2);
+$stmt->close();
+
+$stmt2 = $conn->prepare ("SELECT NOMBRE".$l.", INSTRUCCIONES".$l.",PUNTO FROM MATERIALES WHERE CODIGO=?");
+$stmt2->bind_param("s", $codigo_material);
+$stmt2->execute();
+$result = $stmt2->get_result();
 if ($result->num_rows > 0) { 
 	$row = mysqli_fetch_array($result);
 	$nombre_material= str_replace("~","'",$row["NOMBRE".$l]);
 	$instrucciones_material = str_replace("~","'",$row["INSTRUCCIONES".$l]);
 	$p= $row["PUNTO"];
 }
-$sql3 ="SELECT NOMBRE FROM PUNTOS WHERE CODIGO = '$p'";
-$result = $conn->query($sql3);
+$stmt2->close();
+
+$stmt3 = $conn->prepare ("SELECT NOMBRE FROM PUNTOS WHERE CODIGO = ?");
+$stmt3->bind_param("s", $p);
+$stmt3->execute();
+$result = $stmt3->get_result();
 if ($result->num_rows > 0) { 
 	$row = mysqli_fetch_array($result);
 	$nombre_punto=$row["NOMBRE"];
-}?>
+}
+$stmt3->close();
+$conn->close();
+?>
+
 
 <script>
-addWatch('<?=$p?>','<?=$codigo_material?>','<?=$codigo_version?>','<?=$carpeta_destino?>','<?=$l?>', '<?=$nombre_usuario?>', '<?=$instrucciones_material?>', '<?=$nombre_punto?>#<?=$nombre_material?>', '<?=$acceso_material?>');
+	addWatch('<?=$p?>','<?=$codigo_material?>','<?=$codigo_version?>','<?=$carpeta_destino?>','<?=$l?>', '<?=$nombre_usuario?>', '<?=$instrucciones_material?>', '<?=$nombre_punto?>#<?=$nombre_material?>');
 </script>		

@@ -18,8 +18,10 @@ if ($auth == 1){
 		$errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
 		die("Ha ocurrido un error al intentar conectar a la base de datos.");	}
 	mysqli_set_charset($conn, 'utf8');
-	$sql = "UPDATE USUARIOS SET SUSCRIPCION = $tipoclub, FECHADATOSPERSO = '$fecha_actualiza' WHERE CODIGO = '$codigousuario' AND TOKEN ='$token_usuario'";
-	$conn->query($sql);
-	$conn->close();			
+	$stmt = $conn->prepare ("UPDATE USUARIOS SET SUSCRIPCION = ?, FECHADATOSPERSO = ? WHERE CODIGO = ? AND TOKEN = ?");
+	$stmt->bind_param("ssss", $tipoclub, $fecha_actualiza, $codigousuario, $token_usuario);
+	$stmt->execute();
+	$stmt->close();
+	$conn->close();		
 }
 ?>

@@ -18,19 +18,25 @@ else $ruta_admin = "https://admin.imageen.net";
 		die("Ha ocurrido un error al intentar conectar a la base de datos.");
 	}
 mysqli_set_charset($conn, 'utf8');
-$sql = "SELECT NOMBRE, CIUDAD, LOCALIZACION, CLIENTE, IMAGEN FROM PUNTOS WHERE CODIGO ='$codigo'";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
+ $stmt = $conn->prepare ("SELECT NOMBRE, CIUDAD, LOCALIZACION, CLIENTE, IMAGEN FROM PUNTOS WHERE CODIGO =?");
+ $stmt->bind_param("s", $codigo);
+ $stmt->execute();
+ $result = $stmt->get_result();
+
 if ($result->num_rows > 0) {
+	$row = mysqli_fetch_array($result);
 	$nombre_punto 	= $row["NOMBRE"];
 	$nombre_ciudad	= $row["CIUDAD"];
 	$localizacion   = $row["LOCALIZACION"];
 	$cliente        = $row["CLIENTE"];
 	$imagen			= $row["IMAGEN"];
 }
+$stmt->close();
 
-$sql = "SELECT CODIGO, NOMBRE" . $l . ", DESCRIPCION" . $l . ", TIPO, ACCESO, INSTRUCCIONES" . $l . ", IMAGEN FROM MATERIALES WHERE PUNTO ='$codigo' ORDER BY ORDEN";
-$result = $conn->query($sql);
+ $stmt2 = $conn->prepare ("SELECT CODIGO, NOMBRE" . $l . ", DESCRIPCION" . $l . ", TIPO, ACCESO, INSTRUCCIONES" . $l . ", IMAGEN FROM MATERIALES WHERE PUNTO =? ORDER BY ORDEN");
+ $stmt2->bind_param("s", $codigo);
+ $stmt2->execute();
+ $result = $stmt2->get_result();
 ?>
 <?php if ($result->num_rows > 0) : ?>
 
@@ -60,8 +66,11 @@ $result = $conn->query($sql);
 					$carpeta_destino = "";
 					$carpeta_destino2 = "";
 					$carpeta_spanish = "";
-					$sql2 = "SELECT CODIGO, IDIOMA, CARPETA FROM VERSIONES WHERE PUNTO ='$codigo' AND MATERIAL ='$codigo_material'";
-					$result2 = $conn->query($sql2);
+					 "SELECT CODIGO, IDIOMA, CARPETA FROM VERSIONES WHERE PUNTO ='$codigo' AND MATERIAL ='$codigo_material'";
+					 $stmt3 = $conn->prepare ("SELECT CODIGO, IDIOMA, CARPETA FROM VERSIONES WHERE PUNTO =? AND MATERIAL =?");
+					 $stmt3->bind_param("ss", $codigo, $codigo_material);
+					 $stmt3->execute();
+					 $result2 = $stmt3->get_result();
 					if ($result2->num_rows > 0) {
 						while ($row2 = mysqli_fetch_array($result2)) {
 							$codigo_version 	= $row2["CODIGO"];
@@ -79,6 +88,7 @@ $result = $conn->query($sql);
 							}
 						}
 					}
+					$stmt3->close();
 
 					if ($carpeta_destino == "") {
 						if ($carpeta_destino2 != "") {
@@ -254,7 +264,9 @@ $result = $conn->query($sql);
 
 	</div>
 
-<?php endif; ?>
+<?php endif;
+$stmt2->close();
+  ?>
 <?php
 $conn->close();
 ?>

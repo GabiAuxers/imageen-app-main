@@ -19,7 +19,11 @@ if ($conn->connect_error) {
     $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
     die("Ha ocurrido un error al intentar conectar a la base de datos.");
 }
-$sql = "INSERT INTO HVISUAL (FECHA, HORA, IP, USUARIO, PUNTO, MATERIAL, VERSION) VALUES ('$date', '$time', '$ipaddress', '$codigousuario', '$p', '$m', '$v')";
-$conn->query($sql);
-$conn->close();	
+    // Preparar la sentencia SQL
+    $stmt = $conn->prepare("INSERT INTO HVISUAL (FECHA, HORA, IP, USUARIO, PUNTO, MATERIAL, VERSION) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $date, $time, $ipaddress, $codigousuario, $p, $m, $v);
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();          
+
 ?>

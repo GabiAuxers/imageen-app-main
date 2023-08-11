@@ -2,16 +2,16 @@
 <div class="container content-container" style="padding: 10px;">
     <div class="col-12 back-button text-left" style="margin-top: 50px;">
         <a href="?section=infoPerfil&t=3">
-            <img src="assets\img\icons\Atrás.svg" alt="Atrás" style="width: 30px;">
+            <img src="assets\img\icons\Atrás.svg" alt="Atrás" style="padding-top: 40px; width: 44px;">
         </a>
     </div>
     <div class="col-12 p-3">
-        <div class="fila-titulo-perfil mb-3">
-            <p class="txt-perfil">Configuración de Cuenta</p>
+        <div class="fila-titulo-perfil" style="padding-top: 100px;">
+            <p class="txt-perfil"><?=getTxt(280, $l) ?>&nbsp;</p>
         </div>
 
         <div class="listado-info mt-3">
-            <p class="title-infopersonal">Cambiar Contraseña</p>
+            <p class="title-infopersonal"><?=getTxt(302, $l) ?>&nbsp;</p>
             <div class="alineacion-elementos">
                 <div>
                     <!--aqui habria que hacer un echo y traer la variable de la base de datos, en este caso en la tabla usuarios no esta 
@@ -20,13 +20,13 @@
                     <p class="info-texto">asdf</p>
                     <input type="password" class="info-input" value="asdf" style="display: none;">
                 </div>
-                <p class="txt-editar" onclick="toggleEdit(this)">Editar</p>
-                <p class="txt-guardar" onclick="toggleEdit(this)" style="display: none;">Guardar</p>
+                <p class="txt-editar" onclick="toggleEdit(this)"><?=getTxt(299, $l) ?>&nbsp;</p>
+                <p class="txt-guardar" onclick="toggleEdit(this)" style="display: none;"><?=getTxt(300, $l) ?>&nbsp;</p>
             </div>
 
 
             <div class="listado-info mt-3">
-                <p class="title-infopersonal">Suscripción</p>
+                <p class="title-infopersonal"><?=getTxt(303, $l) ?>&nbsp;</p>
                 <div class="alineacion-elementos">
                     <div>
                         <!--Este código PHP imprimirá la clase 'texto-oscuro' para "Standar" y 'texto-claro'
@@ -34,10 +34,10 @@
                         imprimirá 'texto-claro' para "Standar" y 'texto-oscuro' para "Premium".-->
                         <p class="info-texto">
                             <span
-                                class="<?php echo ($suscripcion_usuario == 1) ? 'texto-oscuro' : 'texto-claro'; ?>">Standar</span>
+                                class="<?php echo ($suscripcion_usuario == 1) ? 'texto-oscuro' : 'texto-claro'; ?>">Standard</span>
                             |
                             <span
-                                class="<?php echo ($suscripcion_usuario == 1) ? 'texto-claro' : 'texto-oscuro'; ?>">Premium</span>
+                                class="<?php echo ($suscripcion_usuario == 1) ? 'texto-claro' : 'texto-oscuro'; ?>"><?=getTxt(304, $l) ?>&nbsp;</span>
                         </p>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
             <div class="listado-info mt-4">
                 <!--Incluir aquí con href el enlace a la página de pago. Si es premium dira cancelpar premium, sino dira hacerme premium-->
                 <a class="title-premium">
-                    <?php echo ($suscripcion_usuario == 1) ? 'Hacerme premium' : 'Cancelar premium'; ?>
+                <?php echo ($suscripcion_usuario == 1) ? getTxt(305, $l) . ' ' : 'Cancelar premium'; ?>
                 </a>
             </div>
         </div>

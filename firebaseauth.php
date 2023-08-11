@@ -78,9 +78,7 @@ if (isset($l)) {
         callbacks: {
             signInSuccessWithAuthResult: function(authResult, redirectUrl) {
                 login(authResult.user, <?=$l?>,1);
-
-
-                return false;
+                 return false;
             },
             uiShown: function() {
                 // The widget is rendered.

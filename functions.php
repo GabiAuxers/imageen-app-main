@@ -1,32 +1,37 @@
 <?php
 
-    function get_item_code($v){
-        include "conexion.php";
-        $conn = @new mysqli($db_server, $db_username, $db_userpassword, $db_name);
-        if ($conn->connect_error) {
-            $additionalInfo = "Fallo en la conexión a la base de datos en la clase functions.php - metodo get_item_code - línea 5. Comprueba las credenciales de la base de datos y que el servidor esté funcionando correctamente. Error específico: " . $conn->connect_error;
-            $errorLogger = new ErrorLogger();
-            $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
-            die("Ha ocurrido un error al intentar conectar a la base de datos.");
-        }
-        if ($v == 1){
-            $sql1 = "SELECT USUARIO FROM CONTADORES";
-            $sql2 = "UPDATE CONTADORES SET USUARIO = USUARIO + 1";            
-        }
-        
+function get_item_code($v){
+    include "conexion.php";
+    $conn = @new mysqli($db_server, $db_username, $db_userpassword, $db_name);
+    if ($conn->connect_error) {
+        $additionalInfo = "Fallo en la conexión a la base de datos en la clase functions.php - metodo get_item_code - línea 5. Comprueba las credenciales de la base de datos y que el servidor esté funcionando correctamente. Error específico: " . $conn->connect_error;
+        $errorLogger = new ErrorLogger();
+        $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
+        die("Ha ocurrido un error al intentar conectar a la base de datos.");
+    }
+
+    $dato = null;
+
+    if ($v == 1){
         // Leo
-        $result = mysqli_query($conn,$sql1); 
-        $fila = mysqli_fetch_row($result);
-        $dato = $fila[0]; 
-        $conn->close();         
+        $stmt = $conn->prepare("SELECT USUARIO FROM CONTADORES");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_row();
+        $dato = $row[0];
 
         // Actualizo
-        $conn = new mysqli($db_server, $db_username, $db_userpassword, $db_name);
-        $conn->query($sql2);
-        $conn->close();         
-
-        return $dato;
+        $stmt2 = $conn->prepare("UPDATE CONTADORES SET USUARIO = USUARIO + 1");
+        $stmt2->execute();
+        
+        $stmt->close();
+        $stmt2->close();
     }
+
+    $conn->close();         
+
+    return $dato;
+}
 
     function RandomString($v){
 
@@ -37,19 +42,22 @@
 
     function get_contents_point($codigo){
         include "conexion.php";
-        $conn2 = @new mysqli($db_server, $db_username, $db_userpassword, $db_name);
-        if ($conn2->connect_error) {
+        $conn = @new mysqli($db_server, $db_username, $db_userpassword, $db_name);
+        if ($conn->connect_error) {
             $additionalInfo = "Fallo en la conexión a la base de datos en la clase functions.php - metodo get_contents_point - línea 40. Comprueba las credenciales de la base de datos y que el servidor esté funcionando correctamente. Error específico: " . $conn2->connect_error;
             $errorLogger = new ErrorLogger();
             $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
             die("Ha ocurrido un error al intentar conectar a la base de datos.");
         }
-        $sql2 = "SELECT count(*) FROM MATERIALES WHERE PUNTO = '$codigo'";
-        $result2 = mysqli_query($conn2,$sql2); 
-        $rowcount = mysqli_num_rows($result2);
-        $conn2->close();         
+        $stmt = $conn->prepare ("SELECT count(*) FROM MATERIALES WHERE PUNTO = ?");
+        $stmt->bind_param("s", $codigo);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $rowcount = $row['count(*)'];
+        $stmt->close();
+        $conn->close();         
         return $rowcount;
-        
     }
 
     function get_logo_customer($codigo){
@@ -61,17 +69,20 @@
             $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
             die("Ha ocurrido un error al intentar conectar a la base de datos.");
         }
-        $sql = "SELECT LOGO FROM CLIENTES WHERE CODIGO ='$codigo' LIMIT 1";
-        $result = $conn->query($sql);
+
+       $stmt = $conn->prepare ("SELECT LOGO FROM CLIENTES WHERE CODIGO =? LIMIT 1");
+         $stmt->bind_param("s", $codigo);
+         $stmt->execute();
+         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         if ($result->num_rows > 0) {
             $logo = $row["LOGO"];   
         }else{
             $logo = "n/a";
         }
+        $stmt->close();
         $conn->close();
-        return $logo;
-            
+        return $logo;         
     }
 
     function get_logo_city($codigo){
@@ -83,8 +94,10 @@
             $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
             die("Ha ocurrido un error al intentar conectar a la base de datos.");
         }
-        $sql = "SELECT IMAGEN FROM CIUDADES WHERE CODIGO ='$codigo'";
-        $result = $conn->query($sql);
+         $stmt = $conn->prepare ("SELECT IMAGEN FROM CIUDADES WHERE CODIGO =?");
+         $stmt->bind_param("s", $codigo);
+         $stmt->execute();
+         $result = $stmt->get_result();
         if (!$result) $logo=false;
         else {
             $row = $result->fetch_assoc();
@@ -95,6 +108,7 @@
                 $logo = false;
             }
         }
+        $stmt->close();
         $conn->close();
         return $logo;      
     }    
@@ -153,9 +167,11 @@
             $errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
             die("Ha ocurrido un error al intentar conectar a la base de datos.");
         }
-        $sql = "INSERT INTO DEBUG (texto) VALUES ('$v')";
-        $conn->query($sql);
-        $conn->close(); 
+        $stmt = $conn->prepare("INSERT INTO DEBUG (texto) VALUES (?)");
+        $stmt->bind_param("s", $v);
+        $stmt->execute();
+        $stmt->close();
+        $conn->close();
     }  
    
     function print_log($val) {

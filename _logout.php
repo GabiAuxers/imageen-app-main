@@ -11,8 +11,11 @@ if ($conn->connect_error) {
 	$errorLogger->logErrorToFile('errors.txt', "Error de conexión a la base de datos", $additionalInfo);
 	die("Ha ocurrido un error al intentar conectar a la base de datos.");
 }
-$sql = "UPDATE USUARIOS SET TOKEN ='' WHERE CODIGO = '$codigousuario' AND TOKEN ='$token'";
-$conn->query($sql);
+$stmt = $conn->prepare ("UPDATE USUARIOS SET TOKEN ='' WHERE CODIGO = ? AND TOKEN =?");
+$stmt -> bind_param("ss", $codigousuario, $token);
+$stmt->execute();
+$stmt->close();
+
 $conn->close();	
 
 setcookie("usuario", "", time() + (86400 * 360), "/");     
